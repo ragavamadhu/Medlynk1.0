@@ -192,6 +192,7 @@ app.post('/users/deviceList', function(req, res) {
             else
             result.map(function(device_id,index){
                 connection_callback.query(" SELECT * from session_log where device_id='"+device_id+"' ORDER BY _id DESC LIMIT 1", function (err, result_id, fields){
+                    console.log('SELECT * from session_log where device_id='+device_id+' ORDER BY _id DESC LIMIT 1',result_id);
                     result[index]["server_log_time"]=result_id[0].log_time;
                     if(index==result.length-1)
                      res.send(result);
