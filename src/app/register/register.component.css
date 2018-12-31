@@ -1,0 +1,15 @@
+
+.col-md-4 {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    border: 1px solid;
+}
+#wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+input{
+  font-size:100%;
+}

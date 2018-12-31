@@ -1,0 +1,56 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="container">
+    <div class="row">
+        <div class="col-xs-9 col-xs-offset-1 text-right"><h1><b>Device Management</b></h1></div>  
+        <div class="col-xs-2 text-right"><button class="btn btn-primary " style="background-color:green;font-size:1.5em"><span [routerLink]="['/addDevice']"><b>ADD</b></span></button></div>
+    </div>
+      <div class="table-responsive tableprop">
+          
+<table  style="width:100%" border="1" >
+  <tr>
+  <th class="col-xs-2">Customer Name</th>
+  <th class="col-xs-2">Device Id</th>
+  <th class="col-xs-2">Address</th>
+  <th class="col-xs-2">Key Location</th>
+  <th class="col-xs-2">Device Status</th>
+  <th class="col-xs-2">Actions</th>
+  </tr>
+  <tr  [class]="tablerow" *ngFor="let item of results;let i=index">
+    <td>{{item.customer_name}}</td>
+    <td (click)="navToGauge(i)" style="cursor: pointer;padding:0% 1% 0% 1%">{{item.device_id}}</td>
+    <td>{{item.address}}</td>
+    <td>{{item.key_location}}</td>
+    <td [style.color]="item.color">{{item.device_status}}<br />{{item.display_date}}</td>
+    <td>
+      <div class="col-xs-4" (click)=edit(i) style="text-align:right"><a><img style="min-width:20px" width="40%" src={{editimg}}   alt="edit"></a></div>
+      <div class="col-xs-4" (click)=deletefromtable(i) style="text-align:right"><a><img style="min-width:20px" width="40%" src={{delete}} alt="delete"></a></div>
+      <div class="col-xs-4" (click)=openModal(i) style="text-align:left"><a><img style="min-width:20px" width="80%" src={{setting}}  alt="Settings"></a></div>
+    </td>
+  </tr>
+</table>
+  </div>
+</div>
+
+<div class="backdrop" [ngStyle]="{'display':display}"></div>
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Enter Device Config Password</h3>
+      </div>
+      <form name="form" (ngSubmit)="onSubmitModal()">            
+          <div class="modal-body">
+            <div class="form-group">
+            <h5><label for="exampleInputPassword1">Enter password</label></h5>
+            <input type="password" class="form-control" name="password" [(ngModel)]="model.I_modalpassword" #password="ngModel" required />
+            </div>
+           <button type="submit" class="btn btn-primary" >Submit</button>
+           <button type="button" style="float: right;" class="btn btn-primary" (click)="onCloseHandled()" >Close</button>
+          </div>
+      </form>
+      <div class="modal-footer">
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal !-->
+

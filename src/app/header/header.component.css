@@ -1,0 +1,38 @@
+.navbar {
+    position: relative;
+    min-height: 50px;
+    margin-bottom: 6px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.98);
+}
+.navbar-toggler-right {
+    position: absolute;
+    right: 0rem;
+}
+.navbar-toggler-icon {
+  color:white !important;
+}
+a {
+    font-size: medium;
+}
+img.navbar-brand {
+    float: left;
+    font-size: 18px;
+    line-height: 20px;
+}
+.badge1 {
+   position:relative;
+}
+.badge1[data-badge]:after {
+   content:attr(data-badge);
+   position:absolute;
+   top:5px;
+   right:10px;
+   font-size:.7em;
+   background:red;
+   color:white;
+   width:18px;height:18px;
+   text-align:center;
+   line-height:18px;
+   border-radius:50%;
+   box-shadow:0 0 1px #333;
+}

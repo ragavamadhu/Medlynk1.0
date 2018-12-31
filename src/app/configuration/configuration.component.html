@@ -1,0 +1,1959 @@
+<div class="container-fluid">
+       <h1 align="center">Medlynk Configuration</h1>
+<div class="row">
+       <div class="tab col-xs-offset-2 col-xs-10 col-xs-offset-right-2" style="width:max-content;" >
+  <button id="tl0" class="tablinks" (click)="openCity(event, 'home','tl0')"><b>Home</b></button>
+  <button id="tl1" class="tablinks" (click)="openCity(event, 'network','tl1')"><b>Network</b></button>
+  <button id="tl2" class="tablinks" (click)="openCity(event, 'serial','tl2')"><b>Serial</b></button>
+  <button id="tl3" class="tablinks" (click)="openCity(event, 'server','tl3')"><b>Server</b></button>
+  <button id="tl4" class="tablinks" (click)="openCity(event, 'slave','tl4')"><b>Slave</b></button>
+  <button id="tl5" class="tablinks" (click)="openCity(event, 'analog','tl5')"><b>Analog</b></button>  
+  <button id="tl6" class="tablinks" (click)="openCity(event, 'datetime','tl6')"><b>Date Time</b></button>
+  <button id="tl7" class="tablinks" (click)="openCity(event, 'digitalcount','tl7')"><b>Digital Count</b></button>
+  <button id="tl8" class="tablinks" (click)="openCity(event, 'ssl','tl8')"><b>SSL</b></button>
+  <button id="tl9" class="tablinks" (click)="openCity(event, 'firmware','tl9')"><b>Firmware</b></button>  
+</div>
+</div>
+<div id="home" align="center" class="tabcontent">
+  <form >
+
+    <table style="margin-top:5%;" width="100%">
+    <tbody >
+    <tr>
+    <td width="165" height="28"></td>
+    <td width="171" height="28">
+    <font new="" roman="" face="Times">MAC Address:</font>
+    </td>
+    <td width="453" height="28" align="left">
+    <font new="" roman="" value="" face="Times">{{model.home.mac}}</font>
+    </td>
+    </tr>
+    <tr>
+    <td width="165" height="30">&nbsp;</td>
+    <td width="171" height="30">
+    <font new="" roman="" face="Times">Firmware version:</font>
+    </td>
+    <td width="453" height="30" align="left">
+    <font new="" roman="" face="Times">{{model.home.fwversion}}</font>
+    </td>
+    </tr>
+    <tr>
+    <td width="165" height="27">&nbsp;</td>
+    <td width="171" height="27">
+    <font new="" roman="" face="Times">Product Model:</font>
+    </td>
+    <td width="453" height="27" align="left">
+    <font new="" roman="" face="Times">{{model.home.productmodel}}</font>
+    </td>
+    </tr>
+    <tr>
+    <td width="165" height="30">&nbsp;</td>
+    <td width="171" height="30">
+    <font new="" roman="" face="Times">Boot loader:</font>
+    </td>
+    <td width="453" height="30" align="left">
+    <font new="" roman="" face="Times">{{model.home.bootloader}}</font>
+    </td>
+    </tr>
+    <tr>
+    <td></td>
+    </tr>
+    <tr>
+    <td></td>
+    </tr>
+    <tr>
+    <td></td>
+    </tr>
+    <tr >
+    <td width="265">&nbsp;</td>
+    <td  align="right">
+    <input style="margin-top:20%;" (click)="next('tl1')" value="Next" name="basicnext" type="button">
+    </td>
+    </tr>
+    </tbody>
+    </table>
+
+    </form>
+</div>
+
+<div id="network" class="tabcontent">
+  <form name="form" (ngSubmit)="submitNetwork()">
+    <table width="800" cellspacing="0" cellpadding="0" bordercolor="#999999" border="0" align="center">
+    <tbody>
+    <tr bgcolor="#FFFFFF" align="center">
+    <td>
+    <table width="800" style="margin-top: 5%" height="200" cellspacing="5" cellpadding="2" border="0">
+    <tbody>
+    <tr>
+    <td width="167" height="23">&nbsp;</td>
+    <td width="176" height="23">IP Address:</td>
+    <td width="446" height="23" align="left">
+    <input name="network_ip1" value="{{model.network.ip[0]}}" [(ngModel)]="model.network.ip[0]" #nip0="ngModel"  size="3"type="text">
+    <b>.</b>
+    <input name="network_ip2" value="{{model.network.ip[1]}}" [(ngModel)]="model.network.ip[1]" #nip1="ngModel"  size="3" type="text">
+    <b>.</b>
+    <input name="network_ip3" value="{{model.network.ip[2]}}" [(ngModel)]="model.network.ip[2]" #nip2="ngModel"  size="3" type="text">
+    <b>.</b>
+    <input name="network_ip4" value="{{model.network.ip[3]}}" [(ngModel)]="model.network.ip[3]" #nip3="ngModel"  size="3" type="text">
+    
+    </td>
+    </tr>
+    <tr>
+    <td width="167" height="23">&nbsp;</td>
+    <td width="176" height="23">Subnet Mask:</td>
+    <td width="446" height="23" align="left">
+    <input name="network_snm1" value="{{model.network.subnet[0]}}" [(ngModel)]="model.network.subnet[0]" #snm0="ngModel"  size="3" type="text">
+    <b>.</b>
+    <input name="network_snm2" value="{{model.network.subnet[1]}}" [(ngModel)]="model.network.subnet[1]" #snm1="ngModel"  size="3" type="text">
+    <b>.</b>
+    <input name="network_snm3" value="{{model.network.subnet[2]}}" [(ngModel)]="model.network.subnet[2]" #snm2="ngModel"  size="3" type="text">
+    <b>.</b>
+    <input name="network_snm4" value="{{model.network.subnet[3]}}" [(ngModel)]="model.network.subnet[3]" #snm3="ngModel" value="000"  size="3" type="text">
+    
+    </td>
+    </tr>
+    <tr>
+    <td width="167" height="23">&nbsp;</td>
+    <td width="176" height="23">Gateway :</td>
+    <td width="446" height="23" align="left">
+    <input name="network_gw1" value="{{model.network.gateway[0]}}" [(ngModel)]="model.network.gateway[0]" #gw0="ngModel"  size="3" type="text">
+    <b>.</b>
+    <input name="network_gw2" value="{{model.network.gateway[1]}}" [(ngModel)]="model.network.gateway[1]" #gw1="ngModel"  size="3" type="text">
+    <b>.</b>
+    <input name="network_gw3" value="{{model.network.gateway[2]}}" [(ngModel)]="model.network.gateway[2]" #gw2="ngModel"  size="3" type="text">
+    <b>.</b>
+    <input name="network_gw4" value="{{model.network.gateway[3]}}" [(ngModel)]="model.network.gateway[3]" #gw3="ngModel"  size="3" type="text">
+    
+    </td>
+    </tr>
+    <tr>
+    <td width="167" height="23">&nbsp;</td>
+    <td width="176" height="23"> DNS IP Address:</td>
+    <td width="446" height="23" align="left">
+    <input name="network_dns1" value="{{model.network.dns[0]}}" [(ngModel)]="model.network.dns[0]" #dns0="ngModel"  size="3" type="text">
+    <b>.</b>
+    <input name="network_dns2" value="{{model.network.dns[1]}}" [(ngModel)]="model.network.dns[1]" #dns1="ngModel"  size="3" type="text">
+    <b>.</b>
+    <input name="network_dns3" value="{{model.network.dns[2]}}" [(ngModel)]="model.network.dns[2]" #dns2="ngModel"  size="3" type="text">
+    <b>.</b>
+    <input name="network_dns4" value="{{model.network.dns[3]}}" [(ngModel)]="model.network.dns[3]" #dns3="ngModel"  size="3" type="text">
+
+  </td>
+    </tr>
+    <tr>
+    <td width="167" height="16"></td>
+    <td width="176" height="16">Network Interface :</td>
+    <td width="446" height="16" align="left">
+        <select name="network_netInterface" [(ngModel)]="network_interface" (change)="onSelectNetwork(1,network_interface)"  class="form-control"  required>
+            <option disabled hidden [value]="selectUndefinedOptionValue">{{model.network.network_interface}}</option>
+            <option [value]="item" *ngFor="let item of netInterfaces">{{item}}</option>
+          </select>   
+    </td>
+    </tr>
+    <tr>
+    <td width="167" height="16"></td>
+    <td width="176" height="16">DHCP :</td>
+    <td width="446" height="16" align="left">
+        <select name="dhcp" [(ngModel)]="network_dhcp" (change)="onSelectNetwork(2,network_dhcp)"  class="form-control"  required>
+                <option disabled hidden [value]="selectUndefinedOptionValue">{{model.network.dhcp}}</option>
+            <option [value]="item" *ngFor="let item of switchoptions">{{item}}</option>
+          </select>   
+    </td>
+    </tr>
+    </tbody>
+    </table>
+    <table width="550" height="100px">
+    <tbody>
+    <tr>
+    <td width="70" align="right">
+    <button (click)="prev('tl0')" type="button">Previous</button>
+    </td>
+    <td width="382" align="center">
+    <button  value="Submit" type="submit">Submit</button>
+    <button (click)="loadDefault(1)" type="button">Load Default</button>
+    </td>
+    <td width="84" align="left">
+    <button (click)="next('tl2')"  type="button">Next</button>
+    </td>
+    </tr>
+    </tbody>
+    </table>
+    <table>
+    <tbody>
+    <tr>
+    <td width="265" height="32">&nbsp;</td>
+    <td width="267" height="32" align="right"></td>
+    <td width="254" height="32" align="left"></td>
+    </tr>
+    <tr></tr>
+    </tbody>
+    </table>
+    </td>
+    </tr>
+    </tbody>
+    </table>
+    
+    </form>    
+</div>
+
+<div id="serial" class="tabcontent">
+  
+    <form name="serial_form" (ngSubmit)="submitSerial()">
+    <table dercolor="#99999" width="800" cellspacing="0" cellpadding="0" border="0" align="center">
+    <tbody>
+    <tr bgcolor="#FFFFFF" align="center">
+    <td>
+    <div style="width:100%;overflow-x:hidden;font-size: 12px;">
+    <table width="800" height="100px" cellspacing="5" cellpadding="2" border="0">
+    <tbody>
+    <tr>
+    <td></td>
+    <td width="215" height="2">&nbsp;
+    <div style="font-size:20px;color:blue;">RS232</div>
+    </td>
+    </tr>
+    <tr>
+    <td width="167" height="27">&nbsp;</td>
+    <td width="176" height="27">Baud Rate: </td>
+    <td width="446" height="27" align="left">
+      <select name="baud_rate" [(ngModel)]="baudrate" (change)="onSelectSerial(1,baudrate)"  class="form-control"  required>
+            <option disabled hidden [value]="selectUndefinedOptionValue">{{model.serial.rs232.baud_rate}}</option>   
+        <option [value]="item" *ngFor="let item of baudrates">{{item}}</option>
+        </select> 
+    </td>
+    </tr>
+    <tr>
+    <td width="167" height="23">&nbsp;</td>
+    <td width="176" height="23">Data bits : </td>
+    <td width="446" height="23" align="left">
+      <select name="data_bits" [(ngModel)]="model.serial.rs232.data_bits" (change)="onSelectSerial(2,model.serial.rs232.data_bits)"  class="form-control"  required>
+        <option disabled hidden [value]="selectUndefinedOptionValue">{{model.serial.rs232.data_bits}}</option>      
+        <option [value]="item" *ngFor="let item of databits">{{item}}</option>
+        </select> 
+    </td>
+    </tr>
+    <tr>
+    <td width="167" height="23">&nbsp;</td>
+    <td width="176" height="23">Parity : </td>
+    <td width="446" height="23" align="left">
+      <select disabled name="parity" [(ngModel)]="parity" (change)="onSelectSerial(3,parity)"  class="form-control"  required>
+          <option [value]="item" *ngFor="let item of parity">{{item}}</option>
+        </select> 
+    </td>
+    </tr>
+    <tr>
+    <td width="167" height="23">&nbsp;</td>
+    <td width="176" height="23">Stop bits : </td>
+    <td width="446" height="23" align="left">
+      <select disabled name="stop_bits" [(ngModel)]="stopbits" (change)="onSelectSerial(4,stopbits)"  class="form-control"  required>
+          <option [value]="item" *ngFor="let item of stopbits">{{item}}</option>
+        </select> 
+    </td>
+    </tr>
+    <tr>
+    <td width="167" height="23">&nbsp;</td>
+    <td width="176" height="23">Flow control : </td>
+    <td width="446" height="23" align="left">
+        <select name="fl_control" [(ngModel)]="model.serial.rs232.flow_control" (change)="onSelectSerial(5,model.serial.rs232.flow_control)"  class="form-control"  required>
+            <option disabled hidden [value]="selectUndefinedOptionValue">{{model.serial.rs232.flow_control}}</option> 
+            <option [value]="item" *ngFor="let item of flowcontrol">{{item}}</option>
+            </select> 
+    </td>
+    </tr>
+    <tr>
+    <td width="167" height="23">&nbsp;</td>
+    <td width="176" height="23">Character wait time out:</td>
+    <td width="446" height="23" align="left">
+    <input  size="15" name="serial_cwto" [(ngModel)]="model.serial.rs232.character_wait_timeout" #character_wait_timeout="ngModel">
+    <label title="Value should multiple of 5">
+    </label> (Between 0 to 65535 msec)
+    </td>
+    </tr>
+    <tr>
+    <td></td>
+    <td width="215" height="2">&nbsp;
+    <div style="font-size:20px;color:blue;">RS485</div>
+    </td>
+    </tr>
+    <tr>
+    <td width="167" height="27">&nbsp;</td>
+    <td width="176" height="27">Baud Rate: </td>
+    <td width="446" height="27" align="left">
+      <select name="baud_rate" [(ngModel)]="baudrate" (change)="onSelectSerial(6,baudrate)"  class="form-control"  required>
+        <option disabled hidden [value]="selectUndefinedOptionValue">{{model.serial.rs485.baud_rate}}</option> 
+        <option [value]="item" *ngFor="let item of baudrates">{{item}}</option>
+        </select> 
+    </td>
+    </tr>
+    <tr>
+    <td width="167" height="23">&nbsp;</td>
+    <td width="176" height="23">Data bits : </td>
+    <td width="446" height="23" align="left">
+      <select name="databits" [(ngModel)]="model.serial.rs485.data_bits" (change)="onSelectSerial(7,model.serial.rs485.data_bits)"  class="form-control"  required>
+        <option disabled hidden [value]="selectUndefinedOptionValue">{{model.serial.rs485.data_bits}}</option> 
+        <option [value]="item" *ngFor="let item of databits">{{item}}</option>
+        </select>   </td>
+    </tr>
+    <tr>
+    <td width="167" height="23">&nbsp;</td>
+    <td width="176" height="23">Parity : </td>
+    <td width="446" height="23" align="left">
+      <select name="parity" disabled [(ngModel)]="parity" (change)="onSelectSerial(8,parity)"  class="form-control"  required>
+          <option [value]="item" *ngFor="let item of parity">{{item}}</option>
+        </select> 
+    </td>
+    </tr>
+    <tr>
+    <td width="167" height="23">&nbsp;</td>
+    <td width="176" height="23">Stop bits : </td>
+    <td width="446" height="23" align="left">
+      <select name="stop_bits" disabled [(ngModel)]="stopbits" (change)="onSelectSerial(9,stopbits)"  class="form-control"  required>
+          <option [value]="item" *ngFor="let item of stopbits">{{item}}</option>
+        </select> 
+    </td>
+    </tr>
+    <tr>
+    <td width="167" height="23">&nbsp;</td>
+    <td width="176" height="23">Character wait time out:</td>
+    <td width="446" height="23" align="left">
+    <input  size="15" name="serial_cwto" [(ngModel)]="model.serial.rs485.character_wait_timeout" #character_wait_timeout="ngModel">
+    <label title="Value should multiple of 5">
+    </label> (Between 0 to 65535 msec) 
+    </td>
+    </tr>
+    </tbody>
+    </table>
+    <table style="margin-top:3%;" width="481">
+    <tbody>
+    <tr>
+    <td width="42">
+    <button (click)="prev('tl1')" name="serialprev" type="button">Previous</button>
+    </td>
+    <td width="382" align="center">
+    <button  type="submit">Submit</button>
+    <button (click)="loadDefault(2)" name="loaddefault" type="button">Load Default</button>
+    </td>
+    <td width="43">
+      <button (click)="next('tl3')" name="serialnext" type="button">Next</button></td>
+    </tr>
+    </tbody>
+    </table>
+    <table>
+    <tbody>
+    <tr>
+    <td width="265" height="32">&nbsp;</td>
+    <td width="267" height="32" align="right"></td>
+    <td width="254" height="32" align="left"></td>
+    </tr>
+    <tr></tr>
+    </tbody>
+    </table>
+    </div>
+    </td>
+    </tr>
+    </tbody>
+    </table>
+    </form>
+</div>
+
+<div id="server" class="tabcontent">
+  
+  <form  (ngSubmit)="submitServer()">
+    <table width="800" height="895px" cellspacing="0" cellpadding="0" bordercolor="#999999" border="0" align="center">
+    <tbody>
+    <tr>
+    <td valign="top">
+    <div align="center">
+    <tr  bgcolor="#FFFFFF" align="center">
+    <td>
+    <table style="margin-top:5%;" width="800" height="290" cellspacing="5" cellpadding="2" border="0">
+    <tbody>
+    <tr>
+    <td width="160" height="27">&nbsp;</td>
+    <td width="183" height="27">IP Filtering :</td>
+    <td width="446" height="27" align="left">
+    <input name="ip11" value="{{model.server.ip_filtering.ip1[0]}}" [(ngModel)]="model.server.ip_filtering.ip1[0]" #ip11="ngModel"  size="3"  type="text">
+    <b>.</b>
+    <input name="ip12" value="{{model.server.ip_filtering.ip1[1]}}" [(ngModel)]="model.server.ip_filtering.ip1[1]" #ip12="ngModel"  size="3" type="text">.
+    <input name="ip13" value="{{model.server.ip_filtering.ip1[2]}}" [(ngModel)]="model.server.ip_filtering.ip1[2]" #ip13="ngModel"  size="3" type="text">.
+    <input name="ip14" value="{{model.server.ip_filtering.ip1[3]}}" [(ngModel)]="model.server.ip_filtering.ip1[3]" #ip14="ngModel"  size="3" type="text">
+    <br>
+    <input name="ip21" value="{{model.server.ip_filtering.ip2[0]}}" [(ngModel)]="model.server.ip_filtering.ip2[0]" #ip21="ngModel" value="000"  size="3" type="text">
+    <b>.</b>
+    <input name="ip22" value="{{model.server.ip_filtering.ip2[1]}}" [(ngModel)]="model.server.ip_filtering.ip2[1]" #ip22="ngModel" value="000"  size="3" type="text">.
+    <input name="ip23" value="{{model.server.ip_filtering.ip2[2]}}" [(ngModel)]="model.server.ip_filtering.ip2[2]" #ip23="ngModel" value="000"  size="3" type="text">.
+    <input name="ip24" value="{{model.server.ip_filtering.ip2[3]}}" [(ngModel)]="model.server.ip_filtering.ip2[3]" #ip24="ngModel" value="000"  size="3" type="text">
+    <br>
+    <input name="ip31" value="{{model.server.ip_filtering.ip3[0]}}" [(ngModel)]="model.server.ip_filtering.ip3[0]" #ip31="ngModel" value="000"  size="3" type="text">
+    <b>.</b>
+    <input name="ip32" value="{{model.server.ip_filtering.ip3[1]}}" [(ngModel)]="model.server.ip_filtering.ip3[1]" #ip32="ngModel" value="000"  size="3" type="text">.
+    <input name="ip33" value="{{model.server.ip_filtering.ip3[2]}}" [(ngModel)]="model.server.ip_filtering.ip3[2]" #ip33="ngModel" value="000"  size="3" type="text">.
+    <input name="ip34" value="{{model.server.ip_filtering.ip3[3]}}" [(ngModel)]="model.server.ip_filtering.ip3[3]" #ip34="ngModel" value="000"  size="3" type="text">
+    <br>
+    <input name="ip41" value="{{model.server.ip_filtering.ip4[0]}}" [(ngModel)]="model.server.ip_filtering.ip4[0]" #ip41="ngModel" value="000"  size="3" type="text">
+    <b>.</b>
+    <input name="ip42" value="{{model.server.ip_filtering.ip4[1]}}" [(ngModel)]="model.server.ip_filtering.ip4[1]" #ip42="ngModel" value="000"  size="3" type="text">.
+    <input name="ip43" value="{{model.server.ip_filtering.ip4[2]}}" [(ngModel)]="model.server.ip_filtering.ip4[2]" #ip43="ngModel" value="000"  size="3" type="text">.
+    <input name="ip44" value="{{model.server.ip_filtering.ip4[3]}}" [(ngModel)]="model.server.ip_filtering.ip4[3]" #ip44="ngModel" value="000"  size="3" type="text">
+    <br>
+    <input name="ip51" value="{{model.server.ip_filtering.ip5[0]}}" [(ngModel)]="model.server.ip_filtering.ip5[0]" #ip51="ngModel" value="000"  size="3" type="text">
+    <b>.</b>
+    <input name="ip52" value="{{model.server.ip_filtering.ip5[1]}}" [(ngModel)]="model.server.ip_filtering.ip5[1]" #ip52="ngModel" value="000"  size="3" type="text">.
+    <input name="ip53" value="{{model.server.ip_filtering.ip5[2]}}" [(ngModel)]="model.server.ip_filtering.ip5[2]" #ip53="ngModel" value="000"  size="3" type="text">.
+    <input name="ip54" value="{{model.server.ip_filtering.ip5[3]}}" [(ngModel)]="model.server.ip_filtering.ip5[3]" #ip54="ngModel" value="000"  size="3" type="text">
+    
+    </td>
+    </tr>
+    <tr style="padding-top:5%;">
+    <td width="167" height="23">&nbsp;</td>
+    <td width="176" height="23">Server Connect wait time:</td>
+    <td width="446" height="23" align="left">
+    <input  size="15" value="1" name="server_connect_waittime" value="{{model.server.server_connect_waittime}}" [(ngModel)]="model.server.server_connect_waittime" #server_connect_waittime="ngModel">
+    ( Between 0 to 999 Sec) 
+    </td>
+    </tr>
+    <tr>
+    <td width="167" height="23">&nbsp;</td>
+    <td width="176" height="23">Remote IP(or)Host Address:</td>
+    <td width="446" height="23" align="left">
+    <input   size="25" type="text" name="remote_ip" value="{{model.server.remote_ip}}" [(ngModel)]="model.server.remote_ip" #remote_ip="ngModel">
+    </td>
+    </tr>
+    <tr>
+    <td width="160" height="23">&nbsp;</td>
+    <td width="183" height="23">Remote Port number:</td>
+    <td width="446" height="23" align="left">
+    <input  size="19"   type="text" name="remote_port_no" value="{{model.server.remote_port_no}}" [(ngModel)]="model.server.remote_port_no" #remote_port_no="ngModel">
+    </td>
+    </tr>
+    <tr>
+            <td width="167" height="23">&nbsp;</td>
+            <td width="176" height="23">Server path</td>
+            <td width="446" height="23" align="left">
+            <input name="server_path" value="{{model.server.server_path}}" [(ngModel)]="model.server.server_path" #server_path="ngModel"  size="25" type="text">
+            </td>
+            </tr>
+    <tr>
+    <td width="160" height="22"></td>
+    <td width="183" height="22">Connection inactive timeout:</td>
+    <td width="446" height="22" align="left">
+    <input size="15"  name="connection_inactive_timeout" value="{{model.server.connection_inactive_timeout}}" [(ngModel)]="model.server.connection_inactive_timeout" #connection_inactive_timeout="ngModel">
+    (1 - 65534 sec,65535 to Disable)
+    </td>
+    </tr>
+    <tr>
+    <td width="160" height="22">&nbsp;</td>
+    <td width="183" height="22">Defeat Long ACK:</td>
+    <td width="446" height="22" align="left">
+        <select name="defeatlongack" [(ngModel)]="defeat_long_ack" (change)="onSelectServer(1,defeat_long_ack)"  class="form-control"  required>
+            <option disabled hidden [value]="selectUndefinedOptionValue">{{model.server.defeat_long_ack}}</option>            
+            <option [value]="item" *ngFor="let item of switchoptions">{{item}}</option>
+          </select>   
+    </td>
+    </tr>
+    <tr>
+    <td width="160" height="22">&nbsp;</td>
+    <td width="183" height="22">Restart on loss of link</td>
+    <td width="446" height="22" align="left">
+        <select name="restartonlossoflink" [(ngModel)]="restart_on_loss_link" (change)="onSelectServer(2,restart_on_loss_link)"  class="form-control"  required>
+            <option disabled hidden [value]="selectUndefinedOptionValue">{{model.server.restart_on_loss_link}}</option>            
+            <option [value]="item" *ngFor="let item of switchoptions">{{item}}</option>
+          </select>   
+    </td>
+    </tr>
+    <tr>
+    <td width="160" height="22">&nbsp;</td>
+    <td width="183" height="22">Telnet IAC</td>
+    <td width="446" height="22" align="left">
+        <select name="telnetIAC" [(ngModel)]="telnet_IAC" (change)="onSelectServer(3,telnet_IAC)"  class="form-control"  required>
+            <option disabled hidden [value]="selectUndefinedOptionValue">{{model.server.telnet_IAC}}</option>            
+            <option [value]="item" *ngFor="let item of switchoptions">{{item}}</option>
+          </select>   
+    </td>
+    </tr>
+    <tr>
+    <td width="160" height="22">&nbsp;</td>
+    <td width="183" height="22">Retain Relay Status</td>
+    <td width="446" height="22" align="left">
+        <select name="retainrelaystatus" [(ngModel)]="retain_relay_status" (change)="onSelectServer(4,retain_relay_status)"  class="form-control"  required>
+            <option disabled hidden [value]="selectUndefinedOptionValue">{{model.server.retain_relay_status}}</option>            
+            <option [value]="item" *ngFor="let item of switchoptions">{{item}}</option>
+          </select>   
+
+    </td>
+    </tr>
+    <tr>
+    <td width="160" height="22">&nbsp;</td>
+    <td width="183" height="22">Data Backup</td>
+    <td width="446" height="22" align="left">
+        <select name="databackup" [(ngModel)]="data_backup" (change)="onSelectServer(5,data_backup)"  class="form-control"  required>
+            <option disabled hidden [value]="selectUndefinedOptionValue">{{model.server.data_backup}}</option>          
+            <option [value]="item" *ngFor="let item of switchoptions">{{item}}</option>
+          </select>   
+
+    </td>
+    </tr>
+    <tr>
+    <td width="160" height="22">&nbsp;</td>
+    <td width="183" height="22">Time stamp</td>
+    <td width="446" height="22" align="left">
+        <select name="timestamp" [(ngModel)]="time_stamp" (change)="onSelectServer(6,time_stamp)"  class="form-control"  required>
+            <option disabled hidden [value]="selectUndefinedOptionValue">{{model.server.time_stamp}}</option>
+            <option [value]="item" *ngFor="let item of switchoptions">{{item}}</option>
+          </select>   
+
+    </td>
+    </tr>
+    <tr>
+    <td width="160" height="22"></td>
+    <td width="183" height="22">Server Connectivity Timeout:</td>
+    <td width="446" height="22" align="left">
+    <input size="15" name="serverconnectivitytimeout" value="{{model.server.server_connectivity_timeout}}" [(ngModel)]="model.server.server_connectivity_timeout" #server_connectivity_timeout="ngModel" > (1 - 254 Min, 255 to Disable)
+    </td>
+    </tr>
+    <tr>
+    <td width="167" height="27">&nbsp;</td>
+    <td width="176" height="27">Server Connectivity Timeout Related Relay and Initial State </td>
+    <td width="446" height="27" align="left">
+        <input size="15" name="serverconnectivitytimeoutrelatedrelay" value="{{model.server.server_connectivity_timeout_related_relay}}" [(ngModel)]="model.server.server_connectivity_timeout_related_relay" #server_connectivity_timeout_related_relay="ngModel" > Any relay (1-8),Initial State ON/OFF      
+        </td>
+    </tr>
+    <tr hidden>
+    <td width="160" height="22">&nbsp;</td>
+    <td width="183" height="22">Relay Initial State</td>
+    <td width="446" height="22" align="left">
+        <select disabled name="relayinitialstate" [(ngModel)]="relay_initial_state" (change)="onSelectServer(8,relay_initial_state)"  class="form-control"  required>
+            <option [value]="item" *ngFor="let item of switchoptions2">{{item}}</option>
+          </select>
+    </td>
+    </tr>
+    <tr>
+    <td width="160" height="22"></td>
+    <td width="183" height="22">Relay Next State Duration</td>
+    <td width="446" height="22" align="left">
+    <input size="15" value="60" name="relay_next_state_duration" value="{{model.server.relay_next_state_duration}}" [(ngModel)]="model.server.relay_next_state_duration" #relay_next_state_duration="ngModel"> (0 - 65535 Sec) 
+    </td>
+    </tr>
+    <tr>
+    <td width="167" height="23">&nbsp;</td>
+    <td width="176" height="23">Login User ID</td>
+    <td width="446" height="23" align="left">
+    <input name="login_user_id" value="{{model.server.login_user_id}}" [(ngModel)]="model.server.login_user_id" #login_user_id="ngModel"  size="25" type="text">
+    </td>
+    </tr>
+    <tr>
+    <td width="167" height="23">&nbsp;</td>
+    <td width="176" height="23">Login Password</td>
+    <td width="446" height="23" align="left">
+    <input name="login_password" value="{{model.server.login_password}}" [(ngModel)]="model.server.login_password" #login_password="ngModel"  size="25" type="text">
+    </td>
+    </tr>
+    <tr>
+    <td width="167" height="23">&nbsp;</td>
+    <td width="176" height="23">SFD</td>
+    <td width="446" height="23" align="left">
+    <input name="sfd" value="{{model.server.sfd}}" [(ngModel)]="model.server.sfd" #sfd="ngModel"  size="25" type="text">
+    </td>
+    </tr>
+    <tr>
+    <td width="167" height="23">&nbsp;</td>
+    <td width="176" height="23">DLM</td>
+    <td width="446" height="23" align="left">
+    <input name="dlm" value="{{model.server.dlm}}" [(ngModel)]="model.server.dlm" #dlm="ngModel"  size="25" type="text">
+    </td>
+    </tr>
+    <tr>
+    <td width="167" height="23">&nbsp;</td>
+    <td width="176" height="23">Packet Try</td>
+    <td width="446" height="23" align="left">
+    <input name="packet_try" value="{{model.server.packet_try}}" [(ngModel)]="model.server.packet_try" #packet_try="ngModel"  size="25" type="text"> 1 - 10 
+    </td>
+    </tr>
+    <tr>
+    <td width="167" height="23">&nbsp;</td>
+    <td width="176" height="23">Response Timeout</td>
+    <td width="446" height="23" align="left">
+    <input name="response_timeout" value="{{model.server.response_timeout}}" [(ngModel)]="model.server.response_timeout" #response_timeout="ngModel"  size="25" type="text"> 1 - 255 Sec 
+    </td>
+    </tr>
+    <tr>
+    <td></td>
+    <td width="215" height="2">&nbsp;  
+    <div style="font-size:20px;color:blue;">GSM</div>
+    </td>
+    </tr>
+    <tr>
+    <td width="160" height="22">&nbsp;</td>
+    <td width="183" height="22">GSM</td>
+    <td width="446" height="22" align="left">
+        <select name="gsmcontrol" [(ngModel)]="gsm" (change)="onSelectServer(9,gsm)"  class="form-control"  required>
+            <option disabled hidden [value]="selectUndefinedOptionValue">{{model.server.gsm.gsm}}</option>
+            <option [value]="item" *ngFor="let item of switchoptions">{{item}}</option>
+          </select>
+    </td>
+    </tr>
+    <tr>
+    <td width="167" height="23">&nbsp;</td>
+    <td width="176" height="23">APN</td>
+    <td width="446" height="23" align="left">
+    <input name="apn" value="{{model.server.gsm.apn}}" [(ngModel)]="model.server.gsm.apn" #apn="ngModel"  size="25" type="text">
+    </td>
+    </tr>
+    <tr>
+    <td width="167" height="23">&nbsp;</td>
+    <td width="176" height="23">User ID</td>
+    <td width="446" height="23" align="left">
+    <input name="user_id" value="{{model.server.gsm.user_id}}" [(ngModel)]="model.server.gsm.user_id" #user_id="ngModel"  size="25" type="text">
+    </td>
+    </tr>
+    <tr>
+    <td width="167" height="23">&nbsp;</td>
+    <td width="176" height="23">Password</td>
+    <td width="446" height="23" align="left">
+    <input name="password" value="{{model.server.gsm.password}}" [(ngModel)]="model.server.gsm.password" #password="ngModel"  size="25" type="text">
+    </td>
+    </tr>
+    </tbody>
+    </table>
+    <table height="100px">
+    <tbody>
+    <tr>
+    <td align="left">
+    <button (click)="prev('tl2')"  type="button">Previous</button>
+    </td>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td align="center">
+        <button  type="submit">Submit</button>
+    &nbsp;&nbsp;&nbsp;
+    <button (click)="loadDefault(3)" type="button">Load Default</button>
+    </td>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td width="43">
+        <button (click)="prev('tl4')"  type="button">Next</button>
+    </td>
+    <td></td>
+    </tr>
+    </tbody>
+    </table>
+    <table>
+    <tbody>
+    <tr>
+    <td width="265" height="32">&nbsp;</td>
+    <td width="267" height="32" align="right"></td>
+    <td width="254" height="32" align="left"></td>
+    </tr>
+    <tr></tr>
+    </tbody>
+    </table>
+    </td>
+    </tr>
+    </tbody>
+    
+    </div>
+    </td>
+    </tr>
+    </tbody>
+    </table>
+    </form>
+</div>
+
+<div id="slave" class="tabcontent">
+  <form  (ngSubmit)="submitSlave()" >
+  <table dercolor="#99999" width="800" cellspacing="0" cellpadding="0" border="0" align="center">
+  <tbody>
+  <tr bgcolor="#FFFFFF" align="center">
+  <td>
+  <div style="margin-top:5%;width:100%;overflow-x:hidden;font-size: 12px;">
+  <table width="800" height="100px" cellspacing="5" cellpadding="2" border="0">
+  <tbody>
+  <tr>
+  <td width="160" height="22"></td>
+  <td width="183" height="22">Http Post Interval</td>
+  <td width="446" height="22" align="left">
+  <input size="15" name="http_post_interval" value="{{model.slave.http_post_interval}}" [(ngModel)]="model.slave.http_post_interval" #http_post_interval="ngModel" > 1 - 65535 Sec 
+  </td>
+  </tr>
+  <tr>
+  <td width="167" height="23">&nbsp;</td>
+  <td width="176" height="23">UNIT ID</td>
+  <td width="446" height="23" align="left">
+  <input name="unit_id" value="{{model.slave.unit_id}}" [(ngModel)]="model.slave.unit_id" #unit_id="ngModel"  size="25" type="text">
+  </td>
+  </tr>
+  <tr>
+  <td width="167" height="23">&nbsp;</td>
+  <td width="176" height="23">Remote Data Path</td>
+  <td width="446" height="23" align="left">
+  <input name="remote_data_path" value="{{model.slave.remote_data_path}}" [(ngModel)]="model.slave.remote_data_path" #remote_data_path="ngModel"  size="25" type="text">
+  </td>
+  </tr>
+  <tr>
+  <td width="167" height="23">&nbsp;</td>
+  <td width="176" height="23">UPS Query</td>
+  <td width="446" height="23" align="left">
+  <input name="ups_query" value="{{model.slave.ups_query}}" [(ngModel)]="model.slave.ups_query" #ups_query="ngModel"  size="25" type="text">
+  </td>
+  </tr>
+  <tr>
+  <td width="160" height="22">&nbsp;</td>
+  <td width="183" height="22">HTTP Method</td>
+  <td width="446" height="22" align="left">
+      <select name="http_method" [(ngModel)]="http_method" (change)="onSelectSlave(1,http_method)"  class="form-control"  required>
+        <option disabled hidden [value]="selectUndefinedOptionValue">{{model.slave.http_method}}</option>       
+        <option [value]="item" *ngFor="let item of httpmethods">{{item}}</option>
+        </select>   
+  </td>
+  </tr>
+  </tbody>
+  </table>
+    <table height="100px">
+    <tbody>
+    <tr>
+    <td align="left">
+        <button (click)="prev('tl3')"  type="button">Previous</button>
+    </td>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td align="center">
+        <button  type="submit">Submit</button>
+    &nbsp;&nbsp;&nbsp;
+    <button (click)="loadDefault(4)" type="button">Load Default</button>
+    </td>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td width="43">
+        <button (click)="prev('tl5')"  type="button">Next</button>
+    </td>
+    <td></td>
+    </tr>
+    </tbody>
+    </table>
+  <table>
+  <tbody>
+  <tr>
+  <td width="265" height="32">&nbsp;</td>
+  <td width="267" height="32" align="right"></td>
+  <td width="254" height="32" align="left"></td>
+  </tr>
+  <tr></tr>
+  </tbody>
+  </table>
+  </div>
+  </td>
+  </tr>
+  </tbody>
+  </table>
+
+  </form>
+</div>
+<div id="analog" class="tabcontent">
+<form name="form" (ngSubmit)="submitAnalog()">
+    <table dercolor="#99999" width="800" cellspacing="0" cellpadding="0" border="0" align="center">
+    <tbody>
+    <tr>
+    <td valign="top">
+    <table border-collapse:="" collapse="" width="200" cellspacing="0" cellpadding="0" bordercolor="#111111" border="0">
+    <tbody>
+    <tr bgcolor="#FFFFFF" align="center">
+    <td>
+    <div style="width:100%;overflow-x:hidden;font-size: 12px;">
+    <table width="800" height="100px" cellspacing="5" cellpadding="2" border="0">
+    <tbody>
+    <tr hidden>
+        <td></td>
+        <td width="215" height="2">&nbsp;
+            <div style="font-size:20px;color:blue;">ANALOG 1</div>
+        </td>
+    </tr>
+    <tr hidden>
+        <td width="167" height="23">&nbsp;</td>
+        <td width="176" height="23">Offset</td>
+        <td width="446" height="23" align="left">
+            <input name="offset1" [(ngModel)]="model.analog.analog1.offset" #offset1="ngModel" value="0"  size="25" type="text">+/-2000uA
+        </td>
+    </tr>
+    <tr hidden>
+        <td width="160" height="22">&nbsp;</td>
+        <td width="183" height="22">Threshold</td>
+        <td width="446" height="22" align="left">
+         <select name="threshold1" [(ngModel)]="threshold1" (change)="onSelectThreshold(1,threshold1)"  class="form-control"  required>
+            <option disabled hidden [value]="selectUndefinedOptionValue">{{model.analog.analog1.threshold}}</option>      
+            <option [value]="item" *ngFor="let item of switchoptions">{{item}}</option>
+        </select>  
+        </td>
+    </tr>
+    <tr hidden>
+        <td width="160" height="22"></td>
+        <td width="183" height="22">Upper Limit</td>
+        <td width="446" height="22" align="left">
+            <input size="15" [(ngModel)]="model.analog.analog1.upperLimit" #upperLimit1="ngModel" value="8000" name="upperLimit1" >4000 - 20000 uA
+        </td>
+    </tr>
+    <tr hidden>
+        <td width="160" height="22"></td>
+        <td width="183" height="22">Lower Limit</td>
+        <td width="446" height="22" align="left">
+            <input size="15" [(ngModel)]="model.analog.analog1.lowerLimit" #lowerLimit1="ngModel" value="4000" name="lowerLimit1" >4000 - 20000 uA
+        </td>
+    </tr>
+    <tr hidden>
+        <td width="167" height="23">&nbsp;</td>
+        <td width="176" height="23">Method</td>
+        <td width="446" height="23" align="left">
+            <input name="method1" [(ngModel)]="model.analog.analog1.method" #method1="ngModel" value="1"  size="25" type="text"> HTTP,RELAY,SMS
+        </td>
+    </tr>
+    <tr hidden>
+        <td width="167" height="23">&nbsp;</td>
+        <td width="176" height="23">Relay</td>
+        <td width="446" height="23" align="left">
+            <input name="relay1" [(ngModel)]="model.analog.analog1.relay" #relay1="ngModel" value="1,0"  size="25" type="text"> (1-8),Initial State ON/OFF
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td width="215" height="2">&nbsp;
+            <div style="font-size:20px;color:blue;">ANALOG 2</div>
+        </td>
+    </tr>
+    <tr>
+        <td width="167" height="23">&nbsp;</td>
+        <td width="176" height="23">Offset</td>
+        <td width="446" height="23" align="left">
+            <input name="offset2" [(ngModel)]="model.analog.analog2.offset" #offset2="ngModel" value="0"  size="25" type="text">+/-2000uA
+        </td>
+    </tr>
+    <tr>
+        <td width="160" height="22">&nbsp;</td>
+        <td width="183" height="22">Threshold</td>
+        <td width="446" height="22" align="left">
+         <select name="threshold2" [(ngModel)]="threshold2" (change)="onSelectThreshold(2,threshold2)"  class="form-control"  required>
+            <option disabled hidden [value]="selectUndefinedOptionValue">{{model.analog.analog2.threshold}}</option>  
+            <option [value]="item" *ngFor="let item of switchoptions">{{item}}</option>
+        </select>  
+        </td>
+    </tr>
+    <tr>
+        <td width="160" height="22"></td>
+        <td width="183" height="22">Upper Limit</td>
+        <td width="446" height="22" align="left">
+            <input size="15" [(ngModel)]="model.analog.analog2.upperLimit" #upperLimit2="ngModel" value="8000" name="upperLimit2" >4000 - 20000 uA
+        </td>
+    </tr>
+    <tr>
+        <td width="160" height="22"></td>
+        <td width="183" height="22">Lower Limit</td>
+        <td width="446" height="22" align="left">
+            <input size="15" [(ngModel)]="model.analog.analog2.lowerLimit" #lowerLimit2="ngModel" value="4000" name="lowerLimit2" >4000 - 20000 uA
+        </td>
+    </tr>
+    <tr>
+        <td width="167" height="23">&nbsp;</td>
+        <td width="176" height="23">Method</td>
+        <td width="446" height="23" align="left">
+            <input name="method2" [(ngModel)]="model.analog.analog2.method" #method2="ngModel" value="1"  size="25" type="text"> HTTP,RELAY,SMS
+        </td>
+    </tr>
+    <tr>
+        <td width="167" height="23">&nbsp;</td>
+        <td width="176" height="23">Relay</td>
+        <td width="446" height="23" align="left">
+            <input name="relay2" [(ngModel)]="model.analog.analog2.relay" #relay2="ngModel" value="2,0"  size="25" type="text"> (1-8),Initial State ON/OFF
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td width="215" height="2">&nbsp;
+            <div style="font-size:20px;color:blue;">ANALOG 3</div>
+        </td>
+    </tr>
+    <tr>
+        <td width="167" height="23">&nbsp;</td>
+        <td width="176" height="23">Offset</td>
+        <td width="446" height="23" align="left">
+            <input name="offset3" [(ngModel)]="model.analog.analog3.offset" #offset3="ngModel" value="0"  size="25" type="text">+/-2000mV
+        </td>
+    </tr>
+    <tr>
+        <td width="160" height="22">&nbsp;</td>
+        <td width="183" height="22">Threshold</td>
+        <td width="446" height="22" align="left">
+         <select name="threshold3" [(ngModel)]="threshold3" (change)="onSelectThreshold(3,threshold3)"  class="form-control"  required>
+            <option disabled hidden [value]="selectUndefinedOptionValue">{{model.analog.analog3.threshold}}</option>  
+            <option [value]="item" *ngFor="let item of switchoptions">{{item}}</option>
+        </select> 
+        </td>
+    </tr>
+    <tr>
+        <td width="160" height="22"></td>
+        <td width="183" height="22">Upper Limit</td>
+        <td width="446" height="22" align="left">
+            <input size="15"  [(ngModel)]="model.analog.analog3.upperLimit" #upperLimit3="ngModel" value="8000" name="upperLimit3" >1 - 5000 mV
+        </td>
+    </tr>
+    <tr>
+        <td width="160" height="22"></td>
+        <td width="183" height="22">Lower Limit</td>
+        <td width="446" height="22" align="left">
+            <input size="15" [(ngModel)]="model.analog.analog3.lowerLimit" #lowerLimit3="ngModel" value="4000" name="lowerLimit3" >1 - 5000 mV
+        </td>
+    </tr>
+    <tr>
+        <td width="167" height="23">&nbsp;</td>
+        <td width="176" height="23">Method</td>
+        <td width="446" height="23" align="left">
+            <input name="method3" [(ngModel)]="model.analog.analog3.method" #method3="ngModel" value="1"  size="25" type="text"> HTTP,RELAY,SMS
+        </td>
+    </tr>
+    <tr>
+        <td width="167" height="23">&nbsp;</td>
+        <td width="176" height="23">Relay</td>
+        <td width="446" height="23" align="left">
+            <input name="relay3" [(ngModel)]="model.analog.analog3.relay" #relay3="ngModel" value="3,0"  size="25" type="text"> (1-8),Initial State ON/OFF
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td width="215" height="2">&nbsp;
+            <div style="font-size:20px;color:blue;">ANALOG 4</div>
+        </td>
+    </tr>
+    <tr>
+        <td width="167" height="23">&nbsp;</td>
+        <td width="176" height="23">Offset</td>
+        <td width="446" height="23" align="left">
+            <input name="offset4" [(ngModel)]="model.analog.analog4.offset" #offset4="ngModel" value="0"  size="25" type="text">+/-2000mV
+        </td>
+    </tr>
+    <tr>
+        <td width="160" height="22">&nbsp;</td>
+        <td width="183" height="22">Threshold</td>
+        <td width="446" height="22" align="left">
+         <select name="threshold4" [(ngModel)]="threshold4" (change)="onSelectThreshold(4,threshold4)"  class="form-control"  required>
+            <option disabled hidden [value]="selectUndefinedOptionValue">{{model.analog.analog4.threshold}}</option>  
+            <option [value]="item" *ngFor="let item of switchoptions">{{item}}</option>
+        </select> 
+        </td>
+    </tr>
+    <tr>
+        <td width="160" height="22"></td>
+        <td width="183" height="22">Upper Limit</td>
+        <td width="446" height="22" align="left">
+            <input size="15" [(ngModel)]="model.analog.analog4.upperLimit" #upperLimit4="ngModel" value="8000" name="upperLimit4" >1 - 5000 mV
+        </td>
+    </tr>
+    <tr>
+        <td width="160" height="22"></td>
+        <td width="183" height="22">Lower Limit</td>
+        <td width="446" height="22" align="left">
+            <input size="15" [(ngModel)]="model.analog.analog4.lowerLimit" #lowerLimit4="ngModel" value="4000" name="lowerLimit4" >1 - 5000 mV
+        </td>
+    </tr>
+    <tr>
+        <td width="167" height="23">&nbsp;</td>
+        <td width="176" height="23">Method</td>
+        <td width="446" height="23" align="left">
+            <input name="method4" [(ngModel)]="model.analog.analog4.method" #method4="ngModel" value="1"  size="25" type="text"> HTTP,RELAY,SMS
+        </td>
+    </tr>
+    <tr>
+        <td width="167" height="23">&nbsp;</td>
+        <td width="176" height="23">Relay</td>
+        <td width="446" height="23" align="left">
+            <input name="relay4" [(ngModel)]="model.analog.analog4.relay" #relay4="ngModel" value="4,0"  size="25" type="text"> (1-8),Initial State ON/OFF
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td width="215" height="2">&nbsp;
+            <div style="font-size:20px;color:blue;">ANALOG 5</div>
+        </td>
+    </tr>
+    <tr>
+        <td width="167" height="23">&nbsp;</td>
+        <td width="176" height="23">Offset</td>
+        <td width="446" height="23" align="left">
+            <input name="offset5" [(ngModel)]="model.analog.analog5.offset" #offset5="ngModel" value="0"  size="25" type="text">+/-2000mV
+        </td>
+    </tr>
+    <tr>
+        <td width="160" height="22">&nbsp;</td>
+        <td width="183" height="22">Threshold</td>
+        <td width="446" height="22" align="left">
+         <select name="threshold5" [(ngModel)]="threshold5" (change)="onSelectThreshold(5,threshold5)"  class="form-control"  required>
+            <option disabled hidden [value]="selectUndefinedOptionValue">{{model.analog.analog5.threshold}}</option>  
+            <option [value]="item" *ngFor="let item of switchoptions">{{item}}</option>
+        </select> 
+        </td>
+    </tr>
+    <tr>
+        <td width="160" height="22"></td>
+        <td width="183" height="22">Upper Limit</td>
+        <td width="446" height="22" align="left">
+            <input size="15" [(ngModel)]="model.analog.analog5.upperLimit" #upperLimit5="ngModel" value="8000" name="upperLimit5" >1 - 5000 mV
+        </td>
+    </tr>
+    <tr>
+        <td width="160" height="22"></td>
+        <td width="183" height="22">Lower Limit</td>
+        <td width="446" height="22" align="left">
+            <input size="15" [(ngModel)]="model.analog.analog5.lowerLimit" #lowerLimit5="ngModel" value="4000" name="lowerLimit5" >1 - 5000 mV
+        </td>
+    </tr>
+    <tr>
+        <td width="167" height="23">&nbsp;</td>
+        <td width="176" height="23">Method</td>
+        <td width="446" height="23" align="left">
+            <input name="method5" [(ngModel)]="model.analog.analog5.method" #method5="ngModel" value="1"  size="25" type="text"> HTTP,RELAY,SMS
+        </td>
+    </tr>
+    <tr>
+        <td width="167" height="23">&nbsp;</td>
+        <td width="176" height="23">Relay</td>
+        <td width="446" height="23" align="left">
+            <input name="relay5" [(ngModel)]="model.analog.analog5.relay" #relay5="ngModel" value="5,0"  size="25" type="text"> (1-8),Initial State ON/OFF
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td width="215" height="2">&nbsp;
+            <div style="font-size:20px;color:blue;">ANALOG 6</div>
+        </td>
+    </tr>
+    <tr>
+        <td width="167" height="23">&nbsp;</td>
+        <td width="176" height="23">Offset</td>
+        <td width="446" height="23" align="left">
+            <input name="offset6" [(ngModel)]="model.analog.analog6.offset" #offset6="ngModel" value="0"  size="25" type="text">+/-2000mV
+        </td>
+    </tr>
+    <tr>
+        <td width="160" height="22">&nbsp;</td>
+        <td width="183" height="22">Threshold</td>
+        <td width="446" height="22" align="left">
+         <select name="threshold6" [(ngModel)]="threshold6" (change)="onSelectThreshold(6,threshold6)"  class="form-control"  required>
+            <option disabled hidden [value]="selectUndefinedOptionValue">{{model.analog.analog6.threshold}}</option>  
+            <option [value]="item" *ngFor="let item of switchoptions">{{item}}</option>
+        </select> 
+        </td>
+    </tr>
+    <tr>
+        <td width="160" height="22"></td>
+        <td width="183" height="22">Upper Limit</td>
+        <td width="446" height="22" align="left">
+            <input size="15" [(ngModel)]="model.analog.analog6.upperLimit" #upperLimit6="ngModel" value="8000" name="upperLimit6" >1 - 12000 mV
+        </td>
+    </tr>
+    <tr>
+        <td width="160" height="22"></td>
+        <td width="183" height="22">Lower Limit</td>
+        <td width="446" height="22" align="left">
+            <input size="15" [(ngModel)]="model.analog.analog6.lowerLimit" #lowerLimit6="ngModel" value="4000" name="lowerLimit6" >1 - 12000 mV
+        </td>
+    </tr>
+    <tr>
+        <td width="167" height="23">&nbsp;</td>
+        <td width="176" height="23">Method</td>
+        <td width="446" height="23" align="left">
+            <input name="method6" [(ngModel)]="model.analog.analog6.method" #method6="ngModel" value="1"  size="25" type="text"> HTTP,RELAY,SMS
+        </td>
+    </tr>
+    <tr>
+        <td width="167" height="23">&nbsp;</td>
+        <td width="176" height="23">Relay</td>
+        <td width="446" height="23" align="left">
+            <input name="relay6" [(ngModel)]="model.analog.analog6.relay" #relay6="ngModel" value="6,0"  size="25" type="text"> (1-8),Initial State ON/OFF
+        </td>
+    </tr>
+    <tr hidden>
+        <td></td>
+        <td width="215" height="2">&nbsp;
+            <div style="font-size:20px;color:blue;">ANALOG 7</div>
+        </td>
+    </tr>
+    <tr hidden>
+        <td width="167" height="23">&nbsp;</td>
+        <td width="176" height="23">Offset</td>
+        <td width="446" height="23" align="left">
+            <input name="offset7" [(ngModel)]="model.analog.analog7.offset" #offset7="ngModel" value="0"  size="25" type="text">+/-2000mV
+        </td>
+    </tr>
+    <tr hidden>
+        <td width="160" height="22">&nbsp;</td>
+        <td width="183" height="22">Threshold</td>
+        <td width="446" height="22" align="left">
+         <select name="threshold7" [(ngModel)]="threshold7" (change)="onSelectThreshold(7,threshold7)"  class="form-control"  required>
+            <option disabled hidden [value]="selectUndefinedOptionValue">{{model.analog.analog7.threshold}}</option>  
+            <option [value]="item" *ngFor="let item of switchoptions">{{item}}</option>
+        </select> 
+        </td>
+    </tr>
+    <tr hidden>
+        <td width="160" height="22"></td>
+        <td width="183" height="22">Upper Limit</td>
+        <td width="446" height="22" align="left">
+            <input size="15" [(ngModel)]="model.analog.analog7.upperLimit" #upperLimit7="ngModel" value="8000" name="upperLimit7" >1 - 12000 mV
+        </td>
+    </tr>
+    <tr hidden>
+        <td width="160" height="22"></td>
+        <td width="183" height="22">Lower Limit</td>
+        <td width="446" height="22" align="left">
+            <input size="15" [(ngModel)]="model.analog.analog7.lowerLimit" #lowerLimit7="ngModel" value="4000" name="lowerLimit7" >1 - 12000 mV
+        </td>
+    </tr>
+    <tr hidden>
+        <td width="167" height="23">&nbsp;</td>
+        <td width="176" height="23">Method</td>
+        <td width="446" height="23" align="left">
+            <input name="method7" [(ngModel)]="model.analog.analog7.method" #method7="ngModel" value="1"  size="25" type="text"> HTTP,RELAY,SMS
+        </td>
+    </tr>
+    <tr hidden>
+        <td width="167" height="23">&nbsp;</td>
+        <td width="176" height="23">Relay</td>
+        <td width="446" height="23" align="left">
+            <input name="relay7" [(ngModel)]="model.analog.analog7.relay" #relay7="ngModel" value="7,0"  size="25" type="text"> (1-8),Initial State ON/OFF
+        </td>
+    </tr>
+    <tr hidden>
+        <td></td>
+        <td width="215" height="2">&nbsp;
+            <div style="font-size:20px;color:blue;">ANALOG 8</div>
+        </td>
+    </tr>
+    <tr hidden>
+        <td width="167" height="23">&nbsp;</td>
+        <td width="176" height="23">Offset</td>
+        <td width="446" height="23" align="left">
+            <input name="offset8" [(ngModel)]="model.analog.analog8.offset" #offset8="ngModel" value="0"  size="25" type="text">+/-10000mV
+        </td>
+    </tr>
+    <tr hidden>
+        <td width="160" height="22">&nbsp;</td>
+        <td width="183" height="22">Threshold</td>
+        <td width="446" height="22" align="left">
+         <select name="threshold8" [(ngModel)]="threshold8" (change)="onSelectThreshold(8,threshold8)"  class="form-control"  required>
+            <option disabled hidden [value]="selectUndefinedOptionValue">{{model.analog.analog8.threshold}}</option>  
+     <option disabled hidden [value]="selectUndefinedOptionValue">{{model.analog.analog1.threshold}}</option>           <option [value]="item" *ngFor="let item of switchoptions">{{item}}</option>
+        </select> 
+        </td>
+    </tr>
+    <tr hidden>
+        <td width="160" height="22"></td>
+        <td width="183" height="22">Upper Limit</td>
+        <td width="446" height="22" align="left">
+            <input size="15" [(ngModel)]="model.analog.analog8.upperLimit" #upperLimit8="ngModel" value="8000" name="upperLimit8" >1 - 10000 *10mV
+        </td>
+    </tr>
+    <tr hidden> 
+        <td width="160" height="22"></td>
+        <td width="183" height="22">Lower Limit</td>
+        <td width="446" height="22" align="left">
+            <input size="15"[(ngModel)]="model.analog.analog8.lowerLimit" #lowerLimit8="ngModel" value="4000" name="lowerLimit8" >1 - 10000 *10mV
+        </td>
+    </tr>
+    <tr hidden>
+        <td width="167" height="23">&nbsp;</td>
+        <td width="176" height="23">Method</td>
+        <td width="446" height="23" align="left">
+            <input name="method8" [(ngModel)]="model.analog.analog8.method" #method8="ngModel" value="1"  size="25" type="text"> HTTP,RELAY,SMS
+        </td>
+    </tr>
+    <tr hidden>
+        <td width="167" height="23">&nbsp;</td>
+        <td width="176" height="23">Relay</td>
+        <td width="446" height="23" align="left">
+            <input name="relay8" [(ngModel)]="model.analog.analog8.relay" #relay8="ngModel" value="8,0"  size="25" type="text"> (1-8),Initial State ON/OFF
+        </td>
+    </tr>
+    <tr >
+        <td></td>
+        <td width="215" height="2">&nbsp;
+            <div style="font-size:20px;color:blue;">SMS Numbers</div>
+        </td>
+    </tr>
+    <tr>
+        <td width="167" height="23">&nbsp;</td>
+        <td width="176" height="23">Master Phone Number</td>
+        <td width="446" height="23" align="left">
+            <input name="param" [(ngModel)]="model.analog.numbers.masterNum" #masterNum="ngModel" value=""  size="25" type="text"> Should start with +
+        </td>
+    </tr>
+    <tr>
+        <td width="167" height="23">&nbsp;</td>
+        <td width="176" height="23">Phone Number 1</td>
+        <td width="446" height="23" align="left">
+            <input name="num1" [(ngModel)]="model.analog.numbers.num1" #num1="ngModel" value=""  size="25" type="text"> Should start with +
+        </td>
+    </tr>
+    <tr>
+        <td width="167" height="23">&nbsp;</td>
+        <td width="176" height="23">Phone Number 2</td>
+        <td width="446" height="23" align="left">
+            <input name="num2" [(ngModel)]="model.analog.numbers.num2" #num2="ngModel" value=""  size="25" type="text"> Should start with +  
+        </td>
+    </tr>
+    <tr>
+        <td width="167" height="23">&nbsp;</td>
+        <td width="176" height="23">Phone Number 3</td>
+        <td width="446" height="23" align="left">
+            <input name="num3" [(ngModel)]="model.analog.numbers.num3" #num3="ngModel" value=""  size="25" type="text"> Should start with +
+        </td>
+    </tr>
+    <tr>
+        <td width="167" height="23">&nbsp;</td>
+        <td width="176" height="23">Phone Number 4</td>
+        <td width="446" height="23" align="left">
+             <input name="num4" [(ngModel)]="model.analog.numbers.num4" #num4="ngModel" value=""  size="25" type="text"> Should start with +
+        </td>
+    </tr>
+    <tr>
+        <td width="167" height="23">&nbsp;</td>
+        <td width="176" height="23">Phone Number 5</td>
+        <td width="446" height="23" align="left">
+            <input name="num5" [(ngModel)]="model.analog.numbers.num5" #num5="ngModel" value=""  size="25" type="text"> Should start with +
+        </td>
+    </tr>
+    <tr>
+        <td width="167" height="23">&nbsp;</td>
+        <td width="176" height="23">Phone Number 6</td>
+        <td width="446" height="23" align="left">
+            <input name="num6" [(ngModel)]="model.analog.numbers.num6" #num6="ngModel" value=""  size="25" type="text"> Should start with +
+        </td>
+    </tr>
+    <tr>
+        <td width="167" height="23">&nbsp;</td>
+        <td width="176" height="23">Phone Number 7</td>
+        <td width="446" height="23" align="left">
+            <input name="num7" [(ngModel)]="model.analog.numbers.num7" #num7="ngModel" value=""  size="25" type="text"> Should start with +
+        </td>
+    </tr>
+    <tr>
+        <td width="167" height="23">&nbsp;</td>
+        <td width="176" height="23">Phone Number 8</td>
+        <td width="446" height="23" align="left">
+            <input name="num8" [(ngModel)]="model.analog.numbers.num8" #num8="ngModel" value=""  size="25" type="text"> Should start with +
+
+        </td>
+    </tr>
+    <tr>
+        <td width="167" height="23">&nbsp;</td>
+        <td width="176" height="23">Phone Number 9</td>
+        <td width="446" height="23" align="left">
+            <input name="num9" [(ngModel)]="model.analog.numbers.num9" #num9="ngModel" value=""  size="25" type="text"> Should start with +
+        </td>
+    </tr>
+    <tr>
+    <td width="167" height="23">&nbsp;</td>
+    <td width="176" height="23">Phone Number 10</td>
+    <td width="446" height="23" align="left">
+        <input name="num10" [(ngModel)]="model.analog.numbers.num10" #num10="ngModel" value=""  size="25" type="text"> Should start with +
+    </td>
+    </tr>
+    </tbody>
+    </table>
+    <table height="100px">
+    <tbody>
+    <tr>
+    <td align="left">
+        <button (click)="prev('tl4')"  type="button">Previous</button>
+    </td>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td align="center">
+        <button  type="submit">Submit</button>
+    &nbsp;&nbsp;&nbsp;
+    <button (click)="loadDefault(5)" type="button">Load Default</button>
+    </td>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td width="43">
+        <button (click)="prev('tl6')"  type="button">Next</button>
+    </td>
+    <td></td>
+    </tr>
+    </tbody>
+    </table>
+    <table>
+        <tbody>
+            <tr>
+                <td width="265" height="32">&nbsp;</td>
+                <td width="267" height="32" align="right"></td>
+                <td width="254" height="32" align="left"></td>
+            </tr>
+            <tr></tr>
+        </tbody>
+    </table>
+    </div>
+    </td>
+    </tr>
+
+    </tbody>
+    </table>
+    </td>
+    </tr>
+    </tbody>
+    </table>
+</form>
+</div>
+
+
+<div id="datetime" class="tabcontent">
+    <form name="form" (ngSubmit)="submitDateTime()">
+        <table dercolor="#99999" width="800" cellspacing="0" cellpadding="0" border="0" align="center">
+        <tbody>
+        <tr>
+        <td valign="top">
+        <table border-collapse:="" collapse="" width="200" cellspacing="0" cellpadding="0" bordercolor="#111111" border="0">
+        <tbody>
+        <tr bgcolor="#FFFFFF" align="center">
+        <td>
+        <table style="margin-top:2%;" width="800" height="256" cellspacing="5" cellpadding="2" border="0">
+        <tbody>
+        <tr>
+            <td width="160" height="22">&nbsp;</td>
+            <td width="183" height="22">Enable NTP :</td>
+            <td width="446" height="22" align="left">
+        <select name="ntp_enable" [(ngModel)]="ntp_enable" (change)="onSelectNTP(1,ntp_enable)"    required>
+            <option disabled hidden [value]="selectUndefinedOptionValue">{{model.datetime.enableNTP}}</option>
+            <option [value]="item" *ngFor="let item of switchoptions">{{item}}</option>
+          </select>  
+            </td>
+        </tr>
+        <tr>
+            <td width="160" height="27">&nbsp;</td>
+            <td width="183" height="27">NTP Server Ip :</td>
+            <td width="446" height="27" align="left">
+                    <input name="ntp1" [(ngModel)]="model.datetime.ntpServerIP.ntp1[0]" #ntp1="ngModel" value="193"  size="3"  type="text">
+                <b>.</b>
+                    <input name="ntp2" [(ngModel)]="model.datetime.ntpServerIP.ntp1[1]" #ntp2="ngModel" value="079"  size="3" type="text">.
+                    <input name="ntp3" [(ngModel)]="model.datetime.ntpServerIP.ntp1[2]" #ntp3="ngModel" value="237"  size="3" type="text">.
+                    <input name="ntp4" [(ngModel)]="model.datetime.ntpServerIP.ntp1[3]" #ntp4="ngModel" value="014"  size="3" type="text">
+                <br>
+                    <input name="ntp5" [(ngModel)]="model.datetime.ntpServerIP.ntp2[0]" #ntp5="ngModel" value="064"  size="3" type="text">
+                <b>.</b>
+                    <input name="ntp6" [(ngModel)]="model.datetime.ntpServerIP.ntp2[1]" #ntp6="ngModel" value="090"  size="3" type="text">.
+                    <input name="ntp7" [(ngModel)]="model.datetime.ntpServerIP.ntp2[2]" #ntp7="ngModel" value="182"  size="3" type="text">.
+                    <input name="ntp8" [(ngModel)]="model.datetime.ntpServerIP.ntp2[3]" #ntp8="ngModel" value="055"  size="3" type="text">
+                <br>
+                    <input name="ntp9" [(ngModel)]="model.datetime.ntpServerIP.ntp3[0]" #ntp9="ngModel" value="216"  size="3" type="text">
+                <b>.</b>
+                    <input name="ntp10" [(ngModel)]="model.datetime.ntpServerIP.ntp3[1]" #ntp10="ngModel" value="171"  size="3" type="text">.
+                    <input name="ntp11" [(ngModel)]="model.datetime.ntpServerIP.ntp3[2]" #ntp11="ngModel" value="112"  size="3" type="text">.
+                    <input name="ntp12" [(ngModel)]="model.datetime.ntpServerIP.ntp3[3]" #ntp12="ngModel" value="036"  size="3" type="text">
+                
+            </td>
+        </tr>
+        <tr>
+            <td width="160" height="23">&nbsp;</td>
+            <td width="183" height="23">NTP Port number :</td>
+            <td width="446" height="23" align="left">
+                <input name="ntpPortNum" [(ngModel)]="model.datetime.ntpPortNum" #ntpPortNum="ngModel" size="19" value="123"  type="text">
+            </td>
+        </tr>
+        <tr>
+            <td width="167" height="23">&nbsp;</td>
+            <td width="176" height="23">Time Zone :</td>
+            <td width="446" height="23" align="left">
+                <input name="timeZone" [(ngModel)]="model.datetime.timeZone" #timeZone="ngModel" value="+5:30"  size="25" type="text">
+            ( Eg: +5:30 )
+            </td>
+        </tr>
+        <tr>
+            <td width="167" height="23">&nbsp;</td>
+            <td width="176" height="23">NTP update time interval :</td>
+            <td width="446" height="23" align="left">
+                <input  [(ngModel)]="model.datetime.ntpInterval" #ntpInterval="ngModel" size="15" value="60" name="ntpInterval">
+            ( Between 0 to 65535 min )
+            </td>
+        </tr>
+        <tr>
+            <td width="167" height="23">&nbsp;</td>
+            <td width="176" height="23">RTC Current Date  [dd/mm/yyyy] :</td>
+            <td width="446" height="23" align="left">
+                <input name="rtcDate" [(ngModel)]="model.datetime.rtcDate" #rtcDate="ngModel" value="28/10/2017"  size="25" type="text">
+            </td>
+        </tr>
+        <tr>
+            <td width="167" height="23">&nbsp;</td>
+            <td width="176" height="23">RTC Current Time [hh:mm:ss] :</td>
+            <td width="446" height="23" align="left">
+                <input name="rtcTime" [(ngModel)]="model.datetime.rtcTime" #rtcTime="ngModel" value="11:07:44"  size="25" type="text">
+            </td>
+        </tr>
+        </tbody>
+        </table>
+        <table height="100px">
+        <tbody>
+        <tr>
+        <td align="left">
+            <button (click)="prev('tl5')"  type="button">Previous</button>
+        </td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td align="center">
+            <button  type="submit">Submit</button>
+        &nbsp;&nbsp;&nbsp;
+        <button (click)="loadDefault(6)" type="button">Load Default</button>
+        </td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td width="43">
+            <button (click)="prev('tl7')"  type="button">Next</button>
+        </td>
+        <td></td>
+        </tr>
+        </tbody>
+    </table>
+        <table>
+            <tbody>
+                <tr>
+                    <td width="265" height="32">&nbsp;</td>
+                    <td width="267" height="32" align="right"></td>
+                    <td width="254" height="32" align="left"></td>
+                </tr>
+                <tr></tr>
+            </tbody>
+        </table>
+        </td>
+        </tr>
+        </tbody>
+        </table>
+        </td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+</div>
+
+
+
+<div id="digitalcount" class="tabcontent">
+<form name="form" (ngSubmit)="submitDigitalcount()">
+<table dercolor="#99999" width="800" cellspacing="0" cellpadding="0" border="0" align="center">
+<tbody>
+<tr>
+<td valign="top">
+<table border-collapse:="" collapse="" width="200" cellspacing="0" cellpadding="0" bordercolor="#111111" border="0">
+<tbody>
+<tr bgcolor="#FFFFFF" align="center">
+<td>
+<div style="width:100%;overflow-x:hidden;font-size: 12px;">
+<table width="800" height="100px" cellspacing="5" cellpadding="2" border="0">
+<tbody>
+<tr>
+<td></td>
+    <td width="215" height="2">&nbsp;
+        <div style="font-size:20px;color:blue;">Digital 1</div>
+    </td>
+</tr>
+<tr>
+    <td width="160" height="22">&nbsp;</td>
+    <td width="183" height="22">Pulse Count</td>
+    <td width="446" height="22" align="left">
+        <select name="pulse_count1" [(ngModel)]="pulse_count1" (change)="onSelectPluseCount(1,pulse_count1)"    required>
+            <option disabled hidden [value]="selectUndefinedOptionValue">{{model.digitalcount.digita1.pluseCount}}</option>          
+            <option [value]="item" *ngFor="let item of switchoptions">{{item}}</option>
+        </select>  
+    </td>
+</tr>
+<tr>
+    <td width="167" height="23">&nbsp;</td>
+    <td width="176" height="23">Digital change</td>
+    <td width="446" height="23" align="left">
+         <select name="digitalchange1" [(ngModel)]="digitalchange1" (change)="onSelectDigitalCount(1,digitalchange1)"    required>
+            <option disabled hidden [value]="selectUndefinedOptionValue">{{model.digitalcount.digita1.digitalChange}}</option>
+            <option [value]="item.value" *ngFor="let item of digitalChg">{{item.name}}</option>
+        </select> 
+    </td>
+</tr>
+<tr>
+    <td width="160" height="22"></td>
+    <td width="183" height="22">Pulse Count Number</td>
+    <td width="446" height="22" align="left">
+        <input size="15" [(ngModel)]="model.digitalcount.digita1.pluseCountNum" #pluseCountNum1="ngModel" value="10" name="pluseCountNum1" > 1 - 9999999 
+    </td>
+</tr>
+<tr>
+    <td width="160" height="22"></td>
+    <td width="183" height="22">Set Pulse Count</td>
+    <td width="446" height="22" align="left">
+        <input size="15" [(ngModel)]="model.digitalcount.digita1.setpulsecount" #setpulsecount1="ngModel" value="10" name="setpulsecount1" > 0 - 9999999
+    </td>
+</tr>
+<tr>
+    <td></td>
+    <td width="215" height="2">&nbsp;
+        <div style="font-size:20px;color:blue;">Digital 2</div>
+    </td>
+</tr>
+<tr>
+    <td width="160" height="22">&nbsp;</td>
+    <td width="183" height="22">Pulse Count</td>
+    <td width="446" height="22" align="left">
+        <select name="pulse_count2" [(ngModel)]="pulse_count2" (change)="onSelectPluseCount(2,pulse_count2)"    required>
+            <option disabled hidden [value]="selectUndefinedOptionValue">{{model.digitalcount.digita2.pluseCount}}</option>        
+            <option [value]="item" *ngFor="let item of switchoptions">{{item}}</option>
+        </select>  
+    </td>
+</tr>
+<tr>
+    <td width="167" height="23">&nbsp;</td>
+    <td width="176" height="23">Digital change</td>
+    <td width="446" height="23" align="left">
+         <select name="digitalchange2" [(ngModel)]="digitalchange2" (change)="onSelectDigitalCount(2,digitalchange2)"    required>
+            <option disabled hidden [value]="selectUndefinedOptionValue">{{model.digitalcount.digita2.digitalChange}}</option>
+            <option [value]="item.value" *ngFor="let item of digitalChg">{{item.name}}</option>
+        </select> 
+    </td>
+</tr>
+<tr>
+    <td width="160" height="22"></td>
+    <td width="183" height="22">Pulse Count Number</td>
+    <td width="446" height="22" align="left">
+        <input size="15" [(ngModel)]="model.digitalcount.digita2.pluseCountNum" #pluseCountNum2="ngModel" value="10" name="pluseCountNum2" > 1 - 9999999 
+    </td>
+</tr>
+<tr>
+    <td width="160" height="22"></td>
+    <td width="183" height="22">Set Pulse Count</td>
+    <td width="446" height="22" align="left">
+        <input size="15" [(ngModel)]="model.digitalcount.digita2.setpulsecount" #setpulsecount2="ngModel" value="10" name="setpulsecount2" > 0 - 9999999
+    </td>
+</tr>
+<tr>
+    <td></td>
+    <td width="215" height="2">&nbsp;
+        <div style="font-size:20px;color:blue;">Digital 3</div>
+    </td>
+</tr>
+<tr>
+    <td width="160" height="22">&nbsp;</td>
+    <td width="183" height="22">Pulse Count</td>
+    <td width="446" height="22" align="left">
+        <select name="pulse_count3" [(ngModel)]="pulse_count3" (change)="onSelectPluseCount(3,pulse_count3)"    required>
+            <option disabled hidden [value]="selectUndefinedOptionValue">{{model.digitalcount.digita3.pluseCount}}</option>        
+            <option [value]="item" *ngFor="let item of switchoptions">{{item}}</option>
+        </select>  
+    </td>
+</tr>
+<tr>
+    <td width="167" height="23">&nbsp;</td>
+    <td width="176" height="23">Digital change</td>
+    <td width="446" height="23" align="left">
+        <select name="digitalchange3" [(ngModel)]="digitalchange3" (change)="onSelectDigitalCount(3,digitalchange3)"    required>
+            <option disabled hidden [value]="selectUndefinedOptionValue">{{model.digitalcount.digita3.digitalChange}}</option>
+            <option [value]="item.value" *ngFor="let item of digitalChg">{{item.name}}</option>
+        </select> 
+    </td>
+</tr>
+<tr>
+    <td width="160" height="22"></td>
+    <td width="183" height="22">Pulse Count Number</td>
+    <td width="446" height="22" align="left">
+        <input size="15" [(ngModel)]="model.digitalcount.digita3.pluseCountNum" #pluseCountNum3="ngModel" value="10" name="pluseCountNum3" > 1 - 9999999 
+    </td>
+</tr>
+<tr>
+    <td width="160" height="22"></td>
+    <td width="183" height="22">Set Pulse Count</td>
+    <td width="446" height="22" align="left">
+        <input size="15" [(ngModel)]="model.digitalcount.digita3.setpulsecount" #setpulsecount3="ngModel" value="10" name="setpulsecount3" > 0 - 9999999
+    </td>
+</tr>
+<tr>
+    <td></td>
+    <td width="215" height="2">&nbsp;
+        <div style="font-size:20px;color:blue;">Digital 4</div>
+    </td>
+</tr>
+<tr>
+    <td width="160" height="22">&nbsp;</td>
+    <td width="183" height="22">Pulse Count</td>
+    <td width="446" height="22" align="left">
+        <select name="pulse_count4" [(ngModel)]="pulse_count4" (change)="onSelectPluseCount(4,pulse_count4)"    required>
+            <option disabled hidden [value]="selectUndefinedOptionValue">{{model.digitalcount.digita4.pluseCount}}</option>        
+            <option [value]="item" *ngFor="let item of switchoptions">{{item}}</option>
+        </select>  
+    </td>
+</tr>
+<tr>
+    <td width="167" height="23">&nbsp;</td>
+    <td width="176" height="23">Digital change</td>
+    <td width="446" height="23" align="left">
+        <select name="digitalchange4" [(ngModel)]="digitalchange4" (change)="onSelectDigitalCount(4,digitalchange4)"    required>
+            <option disabled hidden [value]="selectUndefinedOptionValue">{{model.digitalcount.digita4.digitalChange}}</option>
+            <option [value]="item.value" *ngFor="let item of digitalChg">{{item.name}}</option>
+        </select> 
+    </td>
+</tr>
+<tr>
+    <td width="160" height="22"></td>
+    <td width="183" height="22">Pulse Count Number</td>
+    <td width="446" height="22" align="left">
+        <input size="15" [(ngModel)]="model.digitalcount.digita4.pluseCountNum" #pluseCountNum4="ngModel" value="10" name="pluseCountNum4" > 1 - 9999999 
+    </td>
+</tr>
+<tr>
+    <td width="160" height="22"></td>
+    <td width="183" height="22">Set Pulse Count</td>
+    <td width="446" height="22" align="left">
+        <input size="15" [(ngModel)]="model.digitalcount.digita4.setpulsecount" #setpulsecount4="ngModel" value="10" name="setpulsecount4" > 0 - 9999999
+    </td>
+</tr>
+<tr>
+    <td></td>
+    <td width="215" height="2">&nbsp;
+        <div style="font-size:20px;color:blue;">Digital 5</div>
+    </td>
+</tr>
+<tr>
+    <td width="160" height="22">&nbsp;</td>
+    <td width="183" height="22">Pulse Count</td>
+    <td width="446" height="22" align="left">
+        <select name="pulse_count5" [(ngModel)]="pulse_count5" (change)="onSelectPluseCount(5,pulse_count5)"    required>
+            <option disabled hidden [value]="selectUndefinedOptionValue">{{model.digitalcount.digita5.pluseCount}}</option>        
+            <option [value]="item" *ngFor="let item of switchoptions">{{item}}</option>
+        </select>  
+    </td>
+</tr>
+<tr>
+    <td width="167" height="23">&nbsp;</td>
+    <td width="176" height="23">Digital change</td>
+    <td width="446" height="23" align="left">
+        <select name="digitalchange5" [(ngModel)]="digitalchange5" (change)="onSelectDigitalCount(5,digitalchange5)"    required>
+            <option disabled hidden [value]="selectUndefinedOptionValue">{{model.digitalcount.digita5.digitalChange}}</option>
+            <option [value]="item.value" *ngFor="let item of digitalChg">{{item.name}}</option>
+        </select> 
+    </td>
+</tr>
+<tr>
+    <td width="160" height="22"></td>
+    <td width="183" height="22">Pulse Count Number</td>
+    <td width="446" height="22" align="left">
+        <input size="15" [(ngModel)]="model.digitalcount.digita5.pluseCountNum" #pluseCountNum5="ngModel" value="999" name="pluseCountNum5" > 1 - 9999999 
+    </td>
+</tr>
+<tr>
+    <td width="160" height="22"></td>
+    <td width="183" height="22">Set Pulse Count</td>
+    <td width="446" height="22" align="left">
+        <input size="15" [(ngModel)]="model.digitalcount.digita5.setpulsecount" #setpulsecount5="ngModel" value="10" name="setpulsecount5" > 0 - 9999999 
+    </td>
+</tr>
+<tr>
+    <td></td>
+    <td width="215" height="2">&nbsp;
+        <div style="font-size:20px;color:blue;">Digital 6</div>
+    </td>
+</tr>
+<tr>
+    <td width="160" height="22">&nbsp;</td>
+    <td width="183" height="22">Pulse Count</td>
+    <td width="446" height="22" align="left">
+        <select name="pulse_count6" [(ngModel)]="pulse_count6" (change)="onSelectPluseCount(6,pulse_count6)"    required>
+            <option disabled hidden [value]="selectUndefinedOptionValue">{{model.digitalcount.digita6.pluseCount}}</option>        
+            <option [value]="item" *ngFor="let item of switchoptions">{{item}}</option>
+        </select>  
+    </td>
+</tr>
+<tr>
+    <td width="167" height="23">&nbsp;</td>
+    <td width="176" height="23">Digital change</td>
+    <td width="446" height="23" align="left">
+        <select name="digitalchange6" [(ngModel)]="digitalchange6" (change)="onSelectDigitalCount(6,digitalchange6)"    required>
+            <option disabled hidden [value]="selectUndefinedOptionValue">{{model.digitalcount.digita6.digitalChange}}</option>
+            <option [value]="item.value" *ngFor="let item of digitalChg">{{item.name}}</option>
+        </select> 
+    </td>
+</tr>
+<tr>
+    <td width="160" height="22"></td>
+    <td width="183" height="22">Pulse Count Number</td>
+    <td width="446" height="22" align="left">
+        <input size="15" [(ngModel)]="model.digitalcount.digita6.pluseCountNum" #pluseCountNum6="ngModel" value="999" name="pluseCountNum6" > 1 - 9999999 
+    </td>
+</tr>
+<tr>
+    <td width="160" height="22"></td>
+    <td width="183" height="22">Set Pulse Count</td>
+    <td width="446" height="22" align="left">
+        <input size="15" [(ngModel)]="model.digitalcount.digita6.setpulsecount" #setpulsecount6="ngModel" value="10" name="setpulsecount6" > 0 - 9999999 
+    </td>
+</tr>
+<tr>
+    <td></td>
+    <td width="215" height="2">&nbsp;
+        <div style="font-size:20px;color:blue;">Digital 7</div>
+    </td>
+</tr>
+<tr>
+    <td width="160" height="22">&nbsp;</td>
+    <td width="183" height="22">Pulse Count</td>
+    <td width="446" height="22" align="left">
+        <select name="pulse_count7" [(ngModel)]="pulse_count7" (change)="onSelectPluseCount(7,pulse_count7)"    required>
+            <option disabled hidden [value]="selectUndefinedOptionValue">{{model.digitalcount.digita7.pluseCount}}</option>        
+            <option [value]="item" *ngFor="let item of switchoptions">{{item}}</option>
+        </select>  
+    </td>
+</tr>
+<tr>
+    <td width="167" height="23">&nbsp;</td>
+    <td width="176" height="23">Digital change</td>
+    <td width="446" height="23" align="left">
+        <select name="digitalchange7" [(ngModel)]="digitalchange7" (change)="onSelectDigitalCount(7,digitalchange7)"    required>
+            <option disabled hidden [value]="selectUndefinedOptionValue">{{model.digitalcount.digita7.digitalChange}}</option>
+            <option [value]="item.value" *ngFor="let item of digitalChg">{{item.name}}</option>
+        </select> 
+    </td>
+</tr>
+<tr>
+    <td width="160" height="22"></td>
+    <td width="183" height="22">Pulse Count Number</td>
+    <td width="446" height="22" align="left">
+        <input size="15" [(ngModel)]="model.digitalcount.digita7.pluseCountNum" #pluseCountNum7="ngModel"  value="999" name="pluseCountNum7" > 1 - 9999999 
+    </td>
+</tr>
+<tr>
+    <td width="160" height="22"></td>
+    <td width="183" height="22">Set Pulse Count</td>
+    <td width="446" height="22" align="left">
+        <input size="15" [(ngModel)]="model.digitalcount.digita7.setpulsecount" #setpulsecount7="ngModel" value="10" name="setpulsecount7" > 0 - 9999999 
+    </td>
+</tr>
+<tr>
+    <td></td>
+    <td width="215" height="2">&nbsp;
+        <div style="font-size:20px;color:blue;">Digital 8</div>
+    </td>
+</tr>
+<tr>
+    <td width="160" height="22">&nbsp;</td>
+    <td width="183" height="22">Pulse Count</td>
+    <td width="446" height="22" align="left">
+        <select name="pulse_count8" [(ngModel)]="pulse_count8" (change)="onSelectPluseCount(8,pulse_count8)"    required>
+            <option disabled hidden [value]="selectUndefinedOptionValue">{{model.digitalcount.digita8.pluseCount}}</option>        
+            <option [value]="item" *ngFor="let item of switchoptions">{{item}}</option>
+        </select>  
+    </td>
+</tr>
+<tr>
+    <td width="167" height="23">&nbsp;</td>
+    <td width="176" height="23">Digital change</td>
+    <td width="446" height="23" align="left">
+        <select name="digitalchange8" [(ngModel)]="digitalchange8" (change)="onSelectDigitalCount(8,digitalchange8)"    required>
+            <option disabled hidden [value]="selectUndefinedOptionValue">{{model.digitalcount.digita8.digitalChange}}</option>
+            <option [value]="item.value" *ngFor="let item of digitalChg">{{item.name}}</option>
+        </select> 
+    </td>
+</tr>
+<tr>
+    <td width="160" height="22"></td>
+    <td width="183" height="22">Pulse Count Number</td>
+    <td width="446" height="22" align="left">
+        <input size="15" [(ngModel)]="model.digitalcount.digita8.pluseCountNum" #pluseCountNum8="ngModel"  value="999" name="pluseCountNum8" > 1 - 9999999 
+    </td>
+</tr>
+<tr>
+    <td width="160" height="22"></td>
+    <td width="183" height="22">Set Pulse Count</td>
+    <td width="446" height="22" align="left">
+        <input size="15" [(ngModel)]="model.digitalcount.digita8.setpulsecount" #setpulsecount8="ngModel" value="10" name="setpulsecount8" > 0 - 9999999 
+    </td>
+</tr>
+
+</tbody>
+</table>
+    <table height="100px">
+    <tbody>
+    <tr>
+    <td align="left">
+    <button (click)="prev('tl6')"  type="button">Previous</button>
+    </td>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td align="center">
+        <button  type="submit">Submit</button>
+    &nbsp;&nbsp;&nbsp;
+    <button (click)="loadDefault(7)" type="button">Load Default</button>
+    </td>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td width="43">
+        <button (click)="prev('tl8')"  type="button">Next</button>
+    </td>
+    <td></td>
+    </tr>
+    </tbody>
+    </table>
+<table>
+<tbody>
+<tr>
+<td width="265" height="32">&nbsp;</td>
+<td width="267" height="32" align="right"></td>
+<td width="254" height="32" align="left"></td>
+</tr>
+<tr></tr>
+</tbody>
+</table>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+</div>
+<div id="ssl" class="tabcontent">
+    <form action="ssl_cert_page.html" enctype="multipart/form-data" method="post">
+<table dercolor="#99999" width="800" cellspacing="0" cellpadding="0" border="0" align="center">
+<tbody>
+<tr>
+<td valign="top">
+<table border-collapse:="" collapse="" width="200" cellspacing="0" cellpadding="0" bordercolor="#111111" border="0">
+<tbody>
+<tr>
+<tr bgcolor="#FFFFFF" align="center">
+<td>
+<div style="width:100%;overflow-x:hidden;font-size: 12px;">
+<table style="margin-top:3%;" width="800" height="100px" cellspacing="5" cellpadding="2" border="0">
+<tbody>
+<tr>
+<td width="160" height="22">&nbsp;</td>
+<td width="183" height="22">SSL mode</td>
+<td width="446" height="22" align="left">
+<select name="param">
+<option value="0" selected="">Disable</option>
+<option value="1">Enable</option>
+</select>
+</td>
+</tr>
+<tr>
+<td>
+<br>
+<br>
+</td>
+</tr>
+<tr>
+<td></td>
+<td align="left">Select File : </td>
+<td>
+<input name="fileup" type="file">
+</td>
+<td align="right"></td>
+<td></td>
+</tr>
+<tr>
+<td>
+<br>
+<br>
+</td>
+</tr>
+<tr>
+<td></td>
+<td align="left">Certificate : </td>
+<td align="center">No file</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+    <table height="100px">
+    <tbody>
+    <tr>
+    <td align="left">
+    <button (click)="prev('tl7')"  type="button">Previous</button>
+    </td>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td align="center">
+        <button  type="submit">Submit</button>
+    &nbsp;&nbsp;&nbsp;
+    <button (click)="loadDefault(8)" type="button">Load Default</button>
+    &nbsp;&nbsp;&nbsp;
+    <button (click)="next('tl9')"  type="button">Next</button>    
+</td>
+
+    </tr>
+    </tbody>
+    </table>
+<table>
+<tbody>
+<tr>
+<td width="265" height="32">&nbsp;</td>
+<td width="267" height="32" align="right"></td>
+<td width="254" height="32" align="left"></td>
+</tr>
+<tr></tr>
+</tbody>
+</table>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+</div>
+<div id="firmware" class="tabcontent">
+<form action=firmware.html enctype='multipart/form-data' method=post>
+   <div class="row">
+       
+       <div class="col-xs-offset-4 col-xs-2 ">
+            <br />
+            <br />
+            <br />
+            <br />
+            <h4 style="margin-top: 1%;" align="right">Select File:</h4>
+        </div>
+            <div class='col-xs-2' align="left">
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                <input  id='firmware'type="file" name="fileup">
+            </div>
+        
+   </div>
+   <br />
+   <br />
+   <br />
+   <div class="row">
+        <div class="col-xs-offset-3 col-xs-6 col-xs-offsetright-3 ">
+    <h5 style="text-align:center;color:green">After updation all parameters except network parameters to reset to factory defaults</h5>            
+    </div>
+   </div>
+<br />
+<div class="row">
+        <div class="col-xs-offset-3 col-xs-6 col-xs-offsetright-3 ">
+    <h5 style="text-align:center;color:red">Warning: After Click Update Button Just Wait Upto Error or Success Message. 
+            It will take Maximum 2-minute</h5>            
+    </div>
+   </div>
+   <br />
+   <div class="row">
+        <div  class="col-xs-offset-5 col-xs-1">
+                <button style="width:100%;"  class="text-center" (click)="prev('tl8')"  type="button">Prev</button>    
+            </div>
+        <div  class=" col-xs-1 col-xs-offsetright-5 ">
+            <button style="width:100%;"  class="text-center" style="margin:inherit;">Update</button>    
+        </div>
+   </div>
+            </form>
+</div>
+</div> 
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':smsMessage}">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Message </h4>
+         </div>
+            <div class="modal-body">
+               <div class="form-group"><h4>
+                  For quick response send SMS "SET < space > CHANGES" to < {{gsm_mobile_number}} > from Master mobile number </h4>
+              </div>
+            </div>
+          <div class="modal-footer">
+          <button type="button" style="float: right;" class="btn btn-primary" (click)="onClose()" >Ok</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal !-->
+
