@@ -219,7 +219,7 @@ CREATE TABLE IF NOT EXISTS `data_logger`.`device_log_historical` (
   `coordinates` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`_id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 22024
+AUTO_INCREMENT = 1065317
 DEFAULT CHARACTER SET = utf8;
 
 CREATE INDEX `idx_report` ON `data_logger`.`device_log_historical` (`device_id` ASC, `log_time` ASC, `gas_level` ASC, `gas_detector` ASC);
@@ -234,14 +234,18 @@ CREATE TABLE IF NOT EXISTS `data_logger`.`devicelist` (
   `device_id` VARCHAR(45) NOT NULL,
   `device_password` VARCHAR(100) NOT NULL,
   `session_id` VARCHAR(100) NOT NULL,
-  `customer_name` VARCHAR(45) NOT NULL,
+  `customer_name` VARCHAR(100) NOT NULL,
   `coordinates` VARCHAR(45) NOT NULL,
   `address` VARCHAR(200) NOT NULL,
-  `config_password` VARCHAR(45) NOT NULL DEFAULT 'service_password',
+  `config_password` VARCHAR(100) NOT NULL DEFAULT 'service_password',
   `gsm_mobile_number` VARCHAR(45) NOT NULL,
   `key_location` VARCHAR(200) NOT NULL,
   `server_gen_reqid` VARCHAR(45) NOT NULL,
   `device_req_id` VARCHAR(45) NOT NULL,
+  `meter1` VARCHAR(100) NOT NULL DEFAULT 'none',
+  `meter2` VARCHAR(100) NOT NULL DEFAULT 'none',
+  `meter3` VARCHAR(100) NOT NULL DEFAULT 'none',
+  `meter4` VARCHAR(100) NOT NULL DEFAULT 'none',
   PRIMARY KEY (`device_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -371,7 +375,7 @@ CREATE TABLE IF NOT EXISTS `data_logger`.`raw_table` (
   `server_transaction_id` INT(8) NOT NULL,
   PRIMARY KEY (`_id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 27446
+AUTO_INCREMENT = 1065318
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -448,7 +452,7 @@ CREATE TABLE IF NOT EXISTS `data_logger`.`session_log` (
   `data` TEXT NOT NULL,
   PRIMARY KEY (`_id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 27446
+AUTO_INCREMENT = 1068153
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -534,7 +538,7 @@ CREATE TABLE IF NOT EXISTS `data_logger`.`user_details` (
   `approved` TINYINT(4) NOT NULL DEFAULT '1',
   PRIMARY KEY (`user_id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 134315
+AUTO_INCREMENT = 13
 DEFAULT CHARACTER SET = utf8;
 
 CREATE UNIQUE INDEX `email_id` ON `data_logger`.`user_details` (`email_id` ASC);
@@ -561,9 +565,12 @@ CREATE TABLE IF NOT EXISTS `data_logger`.`user_device_list` (
     FOREIGN KEY (`device_id`)
     REFERENCES `data_logger`.`devicelist` (`device_id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 411	
+AUTO_INCREMENT = 264
 DEFAULT CHARACTER SET = utf8;
 
+CREATE INDEX `user_device_list_ibfk_1` ON `data_logger`.`user_device_list` (`user_id` ASC);
+
+CREATE INDEX `user_device_list_ibfk_2` ON `data_logger`.`user_device_list` (`device_id` ASC);
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
