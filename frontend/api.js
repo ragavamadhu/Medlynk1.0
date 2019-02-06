@@ -51,7 +51,7 @@ app.post('/changePassword', function(req, res){
         }
 
     });
-     connection_callback.end();     
+     connection_callback.release();     
     });
 });
 
@@ -92,7 +92,7 @@ app.post('/thirtydaydata', function(req, res){
         //console.log(query);
         res.send(result);
     });
-     connection_callback.end();     
+     connection_callback.release();     
     });
 });
 
@@ -122,7 +122,7 @@ app.post('/users/changePassword', function(req, res){
     if (err){ throw err;
       res.send("1");}
      });
-     connection_callback.end();     
+     connection_callback.release();     
     });
 });
 
@@ -144,7 +144,7 @@ connection_callback.query(" SELECT * from session_log where device_id='"+device_
 });
    }); 
   //console.log("select b.config_password device_password,b.key_location, b.gsm_mobile_number, a.device_Id,a.tank_pressure,a.line_pressure,a.gas_level,a.gas_detector,a.gas_leak,a.low_gas,a.power_level,a.log_time,a.meter1,a.meter2,a.meter3,a.meter4,b.customer_name,a.solenoid log_solenoid, control_data.solenoid control_solenoid ,control_data.device_state_updated from user_device_list c,   device_log_current a inner join devicelist b on a.device_Id=b.device_id  LEFT JOIN control_data ON a.device_Id = control_data.device_id where a.device_Id='"+device_id+"' and c.user_id='"+user_id+"' and  c.device_id=a.device_Id");
-connection_callback.end();
+connection_callback.release();
 });
 });
 
@@ -157,7 +157,7 @@ app.get('/getDevices', function(req, res){
     if (err) throw err;
     res.send(result);
    }); 
-connection_callback.end();  
+connection_callback.release();  
 });  
 });
 
@@ -170,7 +170,7 @@ app.post('/userAdmin', function(req, res){
     if (err) throw err;
     res.send(result);
    }); 
-connection_callback.end();  
+connection_callback.release();  
 });
 });
 
@@ -202,7 +202,7 @@ app.post('/users/deviceList', function(req, res) {
         }
       //res.send(result);
    }); 
-connection_callback.end();
+connection_callback.release();
 });
 });
 
@@ -228,7 +228,7 @@ app.post('/deviceAdmin', function(req, res) {
       connection_callback.query("select a.device_id,b.device_id,b.meter1,b.meter2,b.meter3,b.meter4,b.customer_name,b.address,b.coordinates,b.gsm_mobile_number,b.key_location,b.device_password,b.config_password,c.gas_level,c.gas_detector,c.power_level,c.gas_leak,c.low_gas,c.log_time,d.ang2_threshold,d.ang2_lower_limit,d.ang3_threshold,d.ang3_lower_limit,e.http_post_interval,f.log_time server_log_time from user_device_list a inner join devicelist b ON a.device_id=b.device_id left join device_log_current c on a.device_id=c.device_id left join analog d on a.device_id=d.device_id left join slave_config e on a.device_id=e.device_id left join session_log f on f._id=(SELECT _id from session_log where device_id=a.device_id ORDER BY _id DESC LIMIT 1) where a.user_id='"+data+"';", function (err, result, fields) {
       res.send(result);
     });
-connection_callback.end();  
+connection_callback.release();  
 });    
 });
   
@@ -255,7 +255,7 @@ app.post('/addDevice', function(req, res) {
                 });
             }
         });
-connection_callback.end();    
+connection_callback.release();    
 });
   });
 
@@ -276,7 +276,7 @@ app.post('/deletedevices', function(req, res) {
                 });
         });
     });
-connection_callback.end();  
+connection_callback.release();  
 });    
 });
  
@@ -310,7 +310,7 @@ app.post('/addUsers', function(req, res) {
   });
 }
 });
-connection_callback.end();
+connection_callback.release();
   });
 });
 
@@ -358,7 +358,7 @@ connection.getConnection(function(err,connection_callback){
     });
   });
 });
-connection_callback.end();
+connection_callback.release();
 });
   //console.log(data);
 });
@@ -386,7 +386,7 @@ app.post('/getUserData', function(req, res) {
       }); 
     });
   });
-connection_callback.end();
+connection_callback.release();
 });
 });
 
@@ -401,7 +401,7 @@ app.post('/delete', function(req, res) {
     }
     connection_callback.query("Delete from user_device_list where user_id='"+data.user_id+"'");
     connection_callback.query("Delete from user_details where user_id='"+data.user_id+"'", function (err, result, fields) {});
-connection_callback.end();  
+connection_callback.release();  
 });
 });
 
@@ -432,7 +432,7 @@ app.post('/device/updateSolenoid', function(req, res){
          });     
   }
 });
-connection_callback.end();
+connection_callback.release();
 });
 });
 
@@ -461,7 +461,7 @@ app.post('/users/register', function(req, res){
   else
       res.send("0");
    });
-connection_callback.end();
+connection_callback.release();
 });
 });
 
@@ -480,7 +480,7 @@ app.post('/users/login', function(req, res){
    } 
    else{res.send("0");}
   }); 
-connection_callback.end();  
+connection_callback.release();  
 });
 });
 
@@ -517,7 +517,7 @@ app.post('/reporting', function(req, res){
                  } 
                  else{res.send("0");}
                 });
-      connection_callback.end();
+      connection_callback.release();
             });
   });
 
@@ -541,7 +541,7 @@ app.post('/reporting', function(req, res){
                 } 
                  else{res.send("0");}
                 });
-      connection_callback.end();
+      connection_callback.release();
             });
   });
 
@@ -575,7 +575,7 @@ app.post('/reporting', function(req, res){
                         });
                       }  
                     });
-          connection_callback.end();
+          connection_callback.release();
         });
       }
       logindevid=req.body.device_id;
