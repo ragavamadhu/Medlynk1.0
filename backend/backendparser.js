@@ -199,7 +199,8 @@ function validateDevice(res){
                 console.log("sessid=",sessid_new);    
             }
         });
-    connection_callback.end();  
+   //conn.end() to release a pooled connection is deprecated. connection_callback.end();  
+    connection_callback.release(); 
     }); 
 }
 
@@ -215,7 +216,8 @@ function update_device_list(sessid_new_recieve,dev_id_recieve){
        connection_callback.query(sess_id_query,function(err,result,fields){
           console.log("devicelist updated");
        });
-       connection_callback.end();
+        //conn.end() to release a pooled connection is deprecated. connection_callback.end();
+       connection_callback.release();
     }); 
 }
 
@@ -303,7 +305,8 @@ function get_state_updated(res,exec){
         connection_callback.query("Update devicelist set server_gen_reqid='"+server_gen_reqid+"',device_req_id='"+message.split("&&").pop()+"' where device_id='"+temp_device_id+"'",function(err,result,fields){});
         }
         });
-        connection_callback.end();
+         //conn.end() to release a pooled connection is deprecated. connection_callback.end();
+         connection_callback.release();
     }); 
 }
 
@@ -372,7 +375,8 @@ function getDeviceId(){
             }
            }
        });
-       connection_callback.end();
+       //conn.end() to release a pooled connection is deprecated.connection_callback.end();
+       connection_callback.release();
    }); 
    }
 
@@ -468,7 +472,8 @@ function getDeviceId(){
                }
                    //Not required to handle table empty constraint as table is prepopulated 
            });
-           connection_callback.end();
+            //conn.end() to release a pooled connection is deprecated.connection_callback.end();
+            connection_callback.release();
        }); 
        }
 
@@ -593,7 +598,8 @@ connection.getConnection(function(err,connection_callback){
             console.log("empty result");
         }
      });
-connection_callback.end();
+       //conn.end() to release a pooled connection is deprecated.connection_callback.end();
+       connection_callback.release();
 });
 }
 
@@ -648,7 +654,8 @@ function Update_data_log_current(customer_name,locationLL,coordinates){
             if(err) throw err;
       //     console.log(result);
          });
-         connection_callback.end();
+       //conn.end() to release a pooled connection is deprecated.connection_callback.end();
+       connection_callback.release();
     });
 }
 
@@ -686,7 +693,8 @@ connection.getConnection(function(err,connection_callback){
         if(err) throw err;
         //console.log(result);
      });
-     connection_callback.end();
+       //conn.end() to release a pooled connection is deprecated.connection_callback.end();
+       connection_callback.release();
 });
 }
 
@@ -709,7 +717,8 @@ function insert_session_log(){
             return 0;
             
          });
-         connection_callback.end();
+       //conn.end() to release a pooled connection is deprecated.connection_callback.end();
+       connection_callback.release();
         });
 }
 function insertconfigchange(logindevid){
@@ -719,7 +728,8 @@ function insertconfigchange(logindevid){
     connection_callback.query("INSERT INTO config_change(device_id,config_changes) VALUES('"+logindevid+"','0') ON DUPLICATE KEY UPDATE analog='0',date_time_config='0',digital_count_config='0',home_config='0',network_config='0',serial_config='0',server_config='0',slave_config='0',ssl_config='0'",function(err,result,fields){
         console.log("configchanges updated");
     });    
-connection_callback.end();
+       //conn.end() to release a pooled connection is deprecated.connection_callback.end();
+       connection_callback.release();
 });
 }
 function insertconfigdata(logindevid){
@@ -810,6 +820,7 @@ function insertconfigdata(logindevid){
       console.log(valueouter+":\n"+queries[j]+"\n");
         connection_callback.query(queries[j], function (err, result, fields){});    
     });
-    connection_callback.end();
+       //conn.end() to release a pooled connection is deprecated.connection_callback.end();
+       connection_callback.release();
     });
     }
