@@ -411,7 +411,6 @@ function getDeviceId(){
                result=result[0];
                device_id=temp_device_id;
                 for(var j=0;j<tokenisedobj_array_copy.length;j++){
-                console.log(tokenisedobj_array_copy[j]);  
                 tokenisedobj=tokenisedobj_array_copy[j];
                 tokenisedobj.sessid=msg_data.sessid;
                 tokenisedobj.sfd=msg_data.sfd;
