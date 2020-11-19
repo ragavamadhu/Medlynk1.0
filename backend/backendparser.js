@@ -709,11 +709,11 @@ function insert_session_log(){
         if(err){
             connection_callback.release();
         }
-        console.log("Connected");
+        //console.log("Connected");
         connection_callback.query(sql_session_log,function(err,result,fields){
             if(err) {throw err};
             console.log("Error in Inserting data");
-           // console.log(result);
+            console.log(sql_session_log);
             return 0;
             
          });
