@@ -4,7 +4,6 @@ var fs = require('fs');
 var util = require('util');
 process.on('uncaughtException', function (err) {
   console.error(err);
-  console.log("Node NOT Exiting...");
 });
 try{
 var log_file = fs.createWriteStream(__dirname + '/logs.txt', {flags : 'a'});
