@@ -104,15 +104,9 @@ app.post("/",function(req,res){
           {
               console.log(err);
           }
-        //  console.log("98989898&&++&&0&&0&&0000&&1000");
-         //res.end("98989898&&++&&0&&0&&0000&&1000");
       }
       if(message.split("&&")[2]==1){
-          // var split=message.split("&&");
-          //var transid=split[5];
-          //console.log("transid:"+transid);
-          //console.log("response=98989898&&++&&1&&0&&"+transid+"&&1001");
-          //res.end("98989898&&++&&1&&0&&"+transid+"&&1001");
+
           try{
           get_state_updated(res,periodic_message_variable);}
           catch(err){
@@ -146,7 +140,6 @@ var connection=mysql.createPool(
             return month<10? "0"+month : ""+month;
         }();
         var server_datetime=server_date.getFullYear()+"-"+month+"-"+server_date.getDate()+" "+server_date.getHours()+":"+server_date.getMinutes()+":"+server_date.getSeconds();
-       // console.log("Server_date"+server_datetime);
         return server_datetime;
     }
 
@@ -164,12 +157,13 @@ function validateDevice(res){
         if(err){
             connection_callback.release();
         }
+        
         var device_id_query="Select * from devicelist where device_id='"+login_tokenised_message.devid+"' AND device_password='"+login_tokenised_message.pwd+"'";
         //console.log(device_id_query);
         connection_callback.query(device_id_query,function(err,result,fields){
             var returnreq_id=Math.floor(Math.random()*8999+1000);
             if(result.length==0){   
-                res.end(login_tokenised_message.dummy_session_id+dlmPattern+login_tokenised_message.sfd+dlmPattern+login_tokenised_message.msgid+dlmPattern+1+dlmPattern+returnreq_id+dlmPattern+login_tokenised_message.Trans_Id);
+                res.end(login_tokenised_message.dummy_session_id+dlmPattern+login_tokenised_message.sfd+dlmPattern+login_tokenised_message.msgid+dlmPattern+1+dlmPattern+returnreq_id+dlmPattern+login_tokenised_message.Trans_Id);                    
             }
             else{
                 var sessid_new=Math.floor(Math.random()*89999999+10000000);
@@ -183,9 +177,10 @@ function validateDevice(res){
             {
                 console.log(err);
             }
-                res.end(sessid_new+dlmPattern+login_tokenised_message.sfd+dlmPattern+login_tokenised_message.msgid+dlmPattern+0+dlmPattern+returnreq_id+dlmPattern+login_tokenised_message.Trans_Id);   
+                res.end(sessid_new+dlmPattern+login_tokenised_message.sfd+dlmPattern+login_tokenised_message.msgid+dlmPattern+0+dlmPattern+returnreq_id+dlmPattern+login_tokenised_message.Trans_Id);  
             }
         });
+   //conn.end() to release a pooled connection is deprecated. connection_callback.end();  
     connection_callback.release(); 
     }); 
 }
@@ -211,8 +206,8 @@ function get_state_updated(res,exec){
             connection_callback.release();
         }
        var device_id_query="Select device_id,server_gen_reqid from devicelist where session_id='"+message.split(dlmPattern)[0]+"'";
-       var server_gen_reqid; 
-       connection_callback.query(device_id_query,function(err,result,fields){
+      var server_gen_reqid; 
+      connection_callback.query(device_id_query,function(err,result,fields){
         if(result.length==0)
            {
                //if session id not found then sends a periodic response with status 1
@@ -228,6 +223,8 @@ function get_state_updated(res,exec){
         server_gen_reqid=server_gen_reqid.substr(server_gen_reqid.length-4,server_gen_reqid.length);
         device_id_query="Select device_state_updated,solenoid,relay_changes from control_data where device_id='"+temp_device_id+"'";
         connection_callback.query(device_id_query,function(err,result,fields){
+        // console.log(device_id_query);
+       //  console.log("result",result);   
          if(result.length==0)
                 {
                     var resmessage=exec(true,server_gen_reqid);
@@ -257,12 +254,13 @@ function get_state_updated(res,exec){
                         var finalres=rs_split_msg[0]+dlmPattern+rs_split_msg[1]+dlmPattern+rs_split_msg[2]+"&&0&&"+message.split("&&").pop()+"&&"+server_gen_reqid+"&&RS:"+result.solenoid+"&&"+relay_change+configdata;
                         res.end(finalres);
                     });
-                    //console.log(rs_split_msg[0]+dlmPattern+rs_split_msg[1]+dlmPattern+rs_split_msg[2]+"&&0&&"+rs_split_msg.pop()+"&&"+server_gen_reqid+"&&RS:"+result.solenoid+"&&1000");
-                    }// res.end(rs_split_msg[0]+dlmPattern+rs_split_msg[1]+dlmPattern+rs_split_msg[2]+"&&a1="+result.solenoid+"&&a2=999&&a3=100&&"+rs_split_msg.pop());
+                    }
+                    // res.end(rs_split_msg[0]+dlmPattern+rs_split_msg[1]+dlmPattern+rs_split_msg[2]+"&&a1="+result.solenoid+"&&a2=999&&a3=100&&"+rs_split_msg.pop());
                     //Changes the device_state-updated once a new periodic message comes up.
                 }
                 else{
                     var resmessage=exec(true,server_gen_reqid);
+                    //res.end(resmessage);
                     new configparser(res,temp_device_id,function(configdata,res){
                         var finalres=resmessage+configdata;
                         res.end(finalres);
@@ -309,6 +307,7 @@ else if(flag==false){
      periodic_response=tokenisedobj.sessid+dlmPattern+tokenisedobj.sfd+dlmPattern+tokenisedobj.msgid+dlmPattern+0+"&&"+tokenisedobj.transid+"&&"+server_gen_reqiddata;
 //    periodic_response="89898989"+dlmPattern+tokenisedobj.sfd+dlmPattern+tokenisedobj.msgid+dlmPattern+0+"&&"+tokenisedobj.transid+"&&1001";
 //    periodic_response=tokenisedobj.sessid+dlmPattern+tokenisedobj.sfd+dlmPattern+tokenisedobj.msgid+dlmPattern+1+"&&req_tid&&"+tokenisedobj.transid+"&&++&&ReqType&&RequestMessage&&ReqId&&++&&ReqType&&RequestMessage&&ReqId";
+}
 return periodic_response;
 }
 
@@ -340,6 +339,7 @@ function getDeviceId(){
             }
            }
        });
+       //conn.end() to release a pooled connection is deprecated.connection_callback.end();
        connection_callback.release();
    }); 
    }
@@ -392,6 +392,7 @@ function getDeviceId(){
     var bulk_response=tokenisedobj.sessid+"&&"+tokenisedobj.sfd+"&&"+tokenisedobj.msgid+"&&"+0+"&&req_tid&&"+tokenisedobj.transid;}
     if(flag==false){
     var bulk_response=tokenisedobj.sessid+"&&"+tokenisedobj.sfd+"&&"+tokenisedobj.msgid+"&&"+1+"&&req_tid&&"+tokenisedobj.transid;}
+
     return bulk_response;
     }
 
@@ -403,7 +404,9 @@ function getDeviceId(){
             if(err){
                 connection_callback.release();
             }
+
            var device_id_query="Select device_id,device_password,customer_name,address,config_password,coordinates from devicelist where session_id='"+tokenisedobj.sessid+"'";
+
            connection_callback.query(device_id_query,function(err,result,fields){
                if(result.length==0)
                    return 1;
@@ -517,7 +520,6 @@ sql=sql.concat("'"+tokenisedobj.data.AD["channel 8"]+"',");
 sql=sql.concat("'00000001',");//temp value set
 var dtemp=tokenisedobj["time"].split(",");
 var datetime=dtemp[0].split("/").reverse().join("-")+" "+dtemp[1];
-//console.log(datetime);
 sql=sql.concat("'"+datetime+"',");
 sql=sql.concat("'01',");//state needs to be verified 
 sql=sql.concat("'"+tokenisedobj.data.TH["Gas Leak"]+"',");
@@ -551,7 +553,7 @@ connection.getConnection(function(err,connection_callback){
     connection_callback.query(sql,function(err,result,fields){
         if(err) throw err;
         if(result[0]==null){
-            console.log("empty result");
+            console.log("");
         }
      });
        connection_callback.release();
@@ -573,7 +575,6 @@ function Update_data_log_current(customer_name,locationLL,coordinates){
     sql_device_log_current_update=sql_device_log_current_update.concat("','"+tokenisedobj.data.DC["Gas Meter 4"]);
     var dtemp=tokenisedobj["time"].split(",");
     var datetime=dtemp[0].split("/").reverse().join("-")+" "+dtemp[1];
-    //console.log(datetime);
     sql_device_log_current_update=sql_device_log_current_update.concat("','"+datetime);
     sql_device_log_current_update=sql_device_log_current_update.concat("','"+tokenisedobj.data.RS["full"]);
     sql_device_log_current_update=sql_device_log_current_update.concat("','"+tokenisedobj.data.AD["Battery Level"]);
@@ -627,7 +628,6 @@ function insertIntodevice_log_historical(customer_name,locationLL,coordinates){
     sql_device_log_historical=sql_device_log_historical.concat("','"+tokenisedobj.data.DC["Gas Meter 4"]);
     var dtemp=tokenisedobj["time"].split(",");
     var datetime=dtemp[0].split("/").reverse().join("-")+" "+dtemp[1];
-    //console.log(datetime);
     sql_device_log_historical=sql_device_log_historical.concat("','"+datetime);
     sql_device_log_historical=sql_device_log_historical.concat("','"+tokenisedobj.data.RS["full"]);
     sql_device_log_historical=sql_device_log_historical.concat("','"+tokenisedobj.data.AD["Battery Level"]);
@@ -662,6 +662,7 @@ function insert_session_log(){
         }
         connection_callback.query(sql_session_log,function(err,result,fields){
             if(err) {throw err};
+           // console.log(result);
             return 0;
             
          });
@@ -673,6 +674,7 @@ function insertconfigchange(logindevid){
     if(err)
     connection_callback.release;
     connection_callback.query("INSERT INTO config_change(device_id,config_changes) VALUES('"+logindevid+"','0') ON DUPLICATE KEY UPDATE analog='0',date_time_config='0',digital_count_config='0',home_config='0',network_config='0',serial_config='0',server_config='0',slave_config='0',ssl_config='0'",function(err,result,fields){
+        
     });    
        connection_callback.release();
 });
@@ -764,7 +766,6 @@ function insertconfigdata(logindevid){
         });
         connection_callback.query(queries[j], function (err, result, fields){});    
     });
-       //conn.end() to release a pooled connection is deprecated.connection_callback.end();
        connection_callback.release();
     });
     }
