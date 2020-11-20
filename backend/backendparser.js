@@ -554,7 +554,7 @@ connection.getConnection(function(err,connection_callback){
     connection_callback.query(sql,function(err,result,fields){
         if(err) throw err;
         if(result[0]==null){
-            console.log("");
+            //console.log("");
         }
      });
        connection_callback.release();
