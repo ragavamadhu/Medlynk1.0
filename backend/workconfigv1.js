@@ -44,10 +44,8 @@ var datadb={
             query="Select * from config_change where device_id='"+device_id+"'";
         connection_callback.query(query,function(err,result,fields){
             
-            console.log("resultcheck",result)
            if(result.length!=0)
             {
-                console.log("check1");  
                 result=result[0];
                 configarray=result;
               async.eachSeries(dbnames,function corelogic(db_name,callback){
@@ -98,24 +96,20 @@ var datadb={
             });
             }
         else{
-            console.log("check7");
             callback();
         }
     },function(){
         if(xml=="")
             {
                 xml="";
-               // console.log("done",xml);
-                console.log("check2");
                 connection_callback.query("Select config_changes from config_change where device_id='"+device_id+"'",function(err,result,fields){
-                    if(result.length==0){
-                        console.log("check3");
+                    if(result.length==0){  
                         connection_callback.query("INSERT INTO data_logger.config_change(device_id,analog,date_time_config,digital_count_config,home_config,network_config,serial_config,server_config,slave_config,ssl_config,config_changes)VALUES('"+device_id+"','0','0','0','0','0','0','0','0','0','0') ON DUPLICATE KEY UPDATE analog='0',date_time_config='0',digital_count_config='0',home_config='0',network_config='0',serial_config='0',server_config='0',slave_config='0',ssl_config='0'",function(err,result,fields){
                            exec("",res);                        
                         });
                     }
                     else{
-                       // console.log("check4",xml);
+                      
                     connection_callback.query("INSERT INTO data_logger.config_change(device_id,analog,date_time_config,digital_count_config,home_config,network_config,serial_config,server_config,slave_config,ssl_config,config_changes)VALUES('"+device_id+"','0','0','0','0','0','0','0','0','0','"+result[0].config_changes+"') ON DUPLICATE KEY UPDATE analog='0',date_time_config='0',digital_count_config='0',home_config='0',network_config='0',serial_config='0',server_config='0',slave_config='0',ssl_config='0',config_changes='"+result[0].config_changes+"'",function(err,result1,fields){
                         var appenddata=""+xml;
                         exec(appenddata,res);
@@ -125,19 +119,15 @@ var datadb={
             
             }
         else{
-            console.log("done",xml);
-        xml="<config>"+xml+"</config>";
-        console.log("Select config_changes from config_change where device_id='"+device_id+"'");
-                              console.log("check2");
+        xml="<config>"+xml+"</config>";          
                 connection_callback.query("Select config_changes from config_change where device_id='"+device_id+"'",function(err,result,fields){
                     if(result.length==0){
-                        console.log("check3");
                         connection_callback.query("INSERT INTO data_logger.config_change(device_id,analog,date_time_config,digital_count_config,home_config,network_config,serial_config,server_config,slave_config,ssl_config,config_changes)VALUES('"+device_id+"','0','0','0','0','0','0','0','0','0','0') ON DUPLICATE KEY UPDATE analog='0',date_time_config='0',digital_count_config='0',home_config='0',network_config='0',serial_config='0',server_config='0',slave_config='0',ssl_config='0'",function(err,result,fields){
                            exec("&&"+xml+"&&0",res);                        
                         });
                     }
                     else{
-                       // console.log("check4",xml);
+                       
                     connection_callback.query("INSERT INTO data_logger.config_change(device_id,analog,date_time_config,digital_count_config,home_config,network_config,serial_config,server_config,slave_config,ssl_config,config_changes)VALUES('"+device_id+"','0','0','0','0','0','0','0','0','0','"+result[0].config_changes+"') ON DUPLICATE KEY UPDATE analog='0',date_time_config='0',digital_count_config='0',home_config='0',network_config='0',serial_config='0',server_config='0',slave_config='0',ssl_config='0',config_changes='"+result[0].config_changes+"'",function(err,result1,fields){
                         result[0].config_changes="000"+result[0].config_changes;
                         result[0].config_changes=result[0].config_changes.substr(result[0].config_changes.length-4,result[0].config_changes.length);
@@ -150,7 +140,6 @@ var datadb={
                 });
         }
             else{
-                console.log("check5");
                 exec("",res);
                 connection_callback.query("Select config_changes from config_change where device_id='"+device_id+"'",function(err,result,fields){
                     if(result.length==0){
@@ -161,12 +150,8 @@ var datadb={
                 });
             }
             });
-            connection_callback.end();
+            connection_callback.release();
     });
     
     }
-
-    
-    
     module.exports=jsonToXml;
-    
