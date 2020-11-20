@@ -1,30 +1,31 @@
 var mysql=require('mysql');
 var configparser=require('./workconfigv1.js');
-var fs = require('fs');
+// var fs = require('fs');
 var util = require('util');
 process.on('uncaughtException', function (err) {
   console.error(err);
 });
-try{
-var log_file = fs.createWriteStream(__dirname + '/logs.txt', {flags : 'a'});
-}
-catch(err){
-    console.log('error',err);
-}
-var log_stdout = process.stdout;
-try{
-console.log = function(a,d) { //
-  if(a==undefined)
-    a=' ';
-  if(d==undefined)
-    d=' ';
-  log_file.write(new Date().toLocaleDateString()+" "+new Date().toLocaleTimeString()+":"+a+d+ '\n');
-  log_stdout.write(a+d + '\n');
-};
-}
-catch(err){
-    console.log('error',err);
-}
+//commenting the log file
+// try{
+// var log_file = fs.createWriteStream(__dirname + '/logs.txt', {flags : 'a'});
+// }
+// catch(err){
+//     console.log('error',err);
+// }
+// var log_stdout = process.stdout;
+// try{
+// console.log = function(a,d) { //
+//   if(a==undefined)
+//     a=' ';
+//   if(d==undefined)
+//     d=' ';
+//   log_file.write(new Date().toLocaleDateString()+" "+new Date().toLocaleTimeString()+":"+a+d+ '\n');
+//   log_stdout.write(a+d + '\n');
+// };
+// }
+// catch(err){
+//     console.log('error',err);
+// }//end of commenting  log file
 
 var device_id="";
 var address="temp address";
