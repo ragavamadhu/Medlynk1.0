@@ -34,8 +34,7 @@ var datadb={
         );
     jsonToXml=function(res,device_id,exec){
         var xml="";
-        var configarray=[];        
-        console.log("started1");
+        var configarray=[];
         var query="";
         connection.getConnection(function(err,connection_callback){
             if(err){
