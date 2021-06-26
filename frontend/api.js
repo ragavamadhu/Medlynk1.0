@@ -10,7 +10,8 @@ app.use(body_parser.urlencoded({
 }));
 var os = require("os");
 var hostname = os.hostname();
-
+var console = {};
+console.log = function(){};
 app.use(function (req, res, next){
     // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
@@ -39,7 +40,7 @@ app.post('/changePassword', function(req, res){
         }
     //console.log("device_id :"+userNmae+"solenoid : "+password);
     connection_callback.query("Select email_id from user_details where email_id='"+email_id+"'", function (err, result, fields){
-        console.log("Select email_id from user_details where email_id='"+email_id+"'");
+        //console.log("Select email_id from user_details where email_id='"+email_id+"'");
         if(result.length!=0 && email_id===result[0].email_id){
             connection_callback.query("update user_details set approved='11' where email_id='"+email_id+"'", function (err, result, fields){
                 res.send("DONE");
@@ -51,7 +52,7 @@ app.post('/changePassword', function(req, res){
         }
 
     });
-     connection_callback.end();     
+     connection_callback.release();     
     });
 });
 
@@ -89,10 +90,10 @@ app.post('/thirtydaydata', function(req, res){
         }
     //console.log("device_id :"+userNmae+"solenoid : "+password);
     connection_callback.query(query, function (err, result, fields){
-        console.log(query);
+        //console.log(query);
         res.send(result);
     });
-     connection_callback.end();     
+     connection_callback.release();     
     });
 });
 
@@ -109,8 +110,8 @@ app.post('/users/changePassword', function(req, res){
         }
     //console.log("device_id :"+userNmae+"solenoid : "+password);
     connection_callback.query("UPDATE user_details SET password='"+password+"' WHERE user_id='"+user_id+"' and password='"+oldpassword+"'", function (err, result, fields){
-    console.log("UPDATE user_details SET password='"+password+"' WHERE user_id='"+user_id+"' and password='"+oldpassword+"'");
-    console.log("result:"+result.affectedRows);
+    //console.log("UPDATE user_details SET password='"+password+"' WHERE user_id='"+user_id+"' and password='"+oldpassword+"'");
+    //console.log("result:"+result.affectedRows);
     
     if(result.affectedRows>0)
     {
@@ -122,7 +123,7 @@ app.post('/users/changePassword', function(req, res){
     if (err){ throw err;
       res.send("1");}
      });
-     connection_callback.end();     
+     connection_callback.release();     
     });
 });
 
@@ -134,7 +135,7 @@ app.post('/device/gaugesInfo', function(req, res){
          var device_id = req.body.device_id;
   device_id = device_id.replace( /:/g, "" );
 	    var user_id = req.body.user_id;
-  console.log(device_id);
+  //console.log(device_id);
 //  connection_callback.query("select b.config_password device_password,b.key_location, b.gsm_mobile_number, a.device_Id,a.tank_pressure,a.line_pressure,a.gas_level,a.gas_detector,a.gas_leak,a.low_gas,a.power_level,a.log_time,a.meter1,a.meter2,a.meter3,a.meter4,b.customer_name,a.solenoid log_solenoid, control_data.solenoid control_solenoid ,control_data.device_state_updated from user_device_list c,   device_log_current a inner join devicelist b on a.device_Id=b.device_id  LEFT JOIN control_data ON a.device_Id = control_data.device_id where a.device_Id='"+device_id+"' and c.user_id='"+user_id+"' and  c.device_id=a.device_Id", function (err, result, fields){
     connection_callback.query("select b.config_password device_password,b.key_location,b.meter1 meter1Data,b.meter2 meter2Data,b.meter3 meter3Data,b.meter4 meter4Data,b.gsm_mobile_number, a.device_Id,a.tank_pressure,a.line_pressure,a.gas_level,a.gas_detector,a.gas_leak,a.low_gas,a.power_level,a.log_time,a.meter1,a.meter2,a.meter3,a.meter4,b.customer_name,a.solenoid log_solenoid,d.ang2_threshold,d.ang2_lower_limit,d.ang3_threshold,d.ang3_lower_limit,e.http_post_interval,f.password ,control_data.solenoid control_solenoid ,control_data.device_state_updated from user_device_list c,   device_log_current a inner join devicelist b on a.device_Id=b.device_id  LEFT JOIN control_data ON a.device_Id = control_data.device_id LEFT JOIN analog d ON a.device_Id = d.device_id LEFT JOIN slave_config e ON a.device_Id = e.device_id LEFT JOIN user_details f ON f.user_id = '"+user_id+"'  where a.device_Id='"+device_id+"' and c.user_id='"+user_id+"' and  c.device_id=a.device_Id", function (err, result, fields){  
 if (err) throw err;
@@ -143,8 +144,8 @@ connection_callback.query(" SELECT * from session_log where device_id='"+device_
     res.send(result);
 });
    }); 
-  console.log("select b.config_password device_password,b.key_location, b.gsm_mobile_number, a.device_Id,a.tank_pressure,a.line_pressure,a.gas_level,a.gas_detector,a.gas_leak,a.low_gas,a.power_level,a.log_time,a.meter1,a.meter2,a.meter3,a.meter4,b.customer_name,a.solenoid log_solenoid, control_data.solenoid control_solenoid ,control_data.device_state_updated from user_device_list c,   device_log_current a inner join devicelist b on a.device_Id=b.device_id  LEFT JOIN control_data ON a.device_Id = control_data.device_id where a.device_Id='"+device_id+"' and c.user_id='"+user_id+"' and  c.device_id=a.device_Id");
-connection_callback.end();
+  //console.log("select b.config_password device_password,b.key_location, b.gsm_mobile_number, a.device_Id,a.tank_pressure,a.line_pressure,a.gas_level,a.gas_detector,a.gas_leak,a.low_gas,a.power_level,a.log_time,a.meter1,a.meter2,a.meter3,a.meter4,b.customer_name,a.solenoid log_solenoid, control_data.solenoid control_solenoid ,control_data.device_state_updated from user_device_list c,   device_log_current a inner join devicelist b on a.device_Id=b.device_id  LEFT JOIN control_data ON a.device_Id = control_data.device_id where a.device_Id='"+device_id+"' and c.user_id='"+user_id+"' and  c.device_id=a.device_Id");
+connection_callback.release();
 });
 });
 
@@ -157,7 +158,7 @@ app.get('/getDevices', function(req, res){
     if (err) throw err;
     res.send(result);
    }); 
-connection_callback.end();  
+connection_callback.release();  
 });  
 });
 
@@ -170,7 +171,7 @@ app.post('/userAdmin', function(req, res){
     if (err) throw err;
     res.send(result);
    }); 
-connection_callback.end();  
+connection_callback.release();  
 });
 });
 
@@ -183,8 +184,8 @@ app.post('/users/deviceList', function(req, res) {
   //var token = req.body.password;
   //console.log(sqlFun(user_id,getJson));
  //connection_callback.query("SELECT a.device_id,b.gas_level,b.gas_detector,b.gas_leak,b.low_gas,b.power_level,c.coordinates,log_time FROM user_device_list a,device_log_current b,devicelist c where  a.user_id='"+user_id+"' and a.device_id = b.device_Id and a.device_id = c.device_id", function (err, result, fields) {
-    connection_callback.query("SELECT distinct a.device_id,b.gas_level,b.gas_detector,b.gas_leak,b.low_gas,b.power_level,c.coordinates,log_time,d.ang2_threshold,d.ang2_lower_limit,d.ang3_threshold,d.ang3_lower_limit,e.http_post_interval FROM user_device_list a,device_log_current b,devicelist c left join analog d on c.device_id=d.device_id left join slave_config e on c.device_id=e.device_id  where  a.user_id='"+user_id+"' and a.device_id = b.device_Id and a.device_id = c.device_id", function (err, result, fields) {       
- console.log("SELECT a.device_id ,b.gas_leak,b.low_gas,b.power_level,c.coordinates,log_time FROM user_device_list a,device_log_current b,devicelist c where  a.user_id='"+user_id+"' and a.device_id = b.device_Id and a.device_id = c.device_id");
+    connection_callback.query("SELECT distinct a.device_id,b.gas_level,b.gas_detector,b.gas_leak,b.low_gas,b.power_level,b.line_pressure,b.tank_pressure,c.coordinates,log_time,d.ang2_threshold,d.ang2_lower_limit,d.ang3_threshold,d.ang3_lower_limit,e.http_post_interval FROM user_device_list a,device_log_current b,devicelist c left join analog d on c.device_id=d.device_id left join slave_config e on c.device_id=e.device_id  where  a.user_id='"+user_id+"' and a.device_id = b.device_Id and a.device_id = c.device_id", function (err, result, fields) {       
+ //console.log("SELECT a.device_id ,b.gas_leak,b.low_gas,b.power_level,c.coordinates,log_time FROM user_device_list a,device_log_current b,devicelist c where  a.user_id='"+user_id+"' and a.device_id = b.device_Id and a.device_id = c.device_id");
       if (err) throw err;
         else{
             if(result.length==0)
@@ -192,7 +193,7 @@ app.post('/users/deviceList', function(req, res) {
             else
             result.map(function(device,index){
                 connection_callback.query(" SELECT * from session_log where device_id='"+device.device_id+"' ORDER BY _id DESC LIMIT 1", function (err, result_id, fields){
-                    console.log('SELECT * from session_log where device_id='+device.device_id+' ORDER BY _id DESC LIMIT 1',result_id);
+                    //console.log('SELECT * from session_log where device_id='+device.device_id+' ORDER BY _id DESC LIMIT 1',result_id);
                     result[index]["th"]=result_id[0].data.substr(result_id[0].data.indexOf("TH:")+3,8);
                     result[index]["server_log_time"]=result_id[0].log_time;
                     if(index==result.length-1)
@@ -202,7 +203,7 @@ app.post('/users/deviceList', function(req, res) {
         }
       //res.send(result);
    }); 
-connection_callback.end();
+connection_callback.release();
 });
 });
 
@@ -214,7 +215,7 @@ function getServerDate(){
           return month<10? "0"+month : ""+month;
       }();
       var server_datetime=server_date.getFullYear()+"-"+month+"-"+server_date.getDate()+" "+server_date.getHours()+":"+server_date.getMinutes()+":"+server_date.getSeconds();
-      console.log("Server_date"+server_datetime);
+      //console.log("Server_date"+server_datetime);
       return server_datetime;
   }
 
@@ -224,11 +225,11 @@ app.post('/deviceAdmin', function(req, res) {
     if(err){
         connection_callback.release();
     }
-      console.log("select distinct b.device_id,c.customer_name,c.address,c.coordinates,c.gsm_mobile_number from user_device_list b,devicelist c where b.user_id='"+data+"' and b.device_id=c.device_id");
+      //console.log("select distinct b.device_id,c.customer_name,c.address,c.coordinates,c.gsm_mobile_number from user_device_list b,devicelist c where b.user_id='"+data+"' and b.device_id=c.device_id");
       connection_callback.query("select a.device_id,b.device_id,b.meter1,b.meter2,b.meter3,b.meter4,b.customer_name,b.address,b.coordinates,b.gsm_mobile_number,b.key_location,b.device_password,b.config_password,c.gas_level,c.gas_detector,c.power_level,c.gas_leak,c.low_gas,c.log_time,d.ang2_threshold,d.ang2_lower_limit,d.ang3_threshold,d.ang3_lower_limit,e.http_post_interval,f.log_time server_log_time from user_device_list a inner join devicelist b ON a.device_id=b.device_id left join device_log_current c on a.device_id=c.device_id left join analog d on a.device_id=d.device_id left join slave_config e on a.device_id=e.device_id left join session_log f on f._id=(SELECT _id from session_log where device_id=a.device_id ORDER BY _id DESC LIMIT 1) where a.user_id='"+data+"';", function (err, result, fields) {
       res.send(result);
     });
-connection_callback.end();  
+connection_callback.release();  
 });    
 });
   
@@ -239,7 +240,7 @@ app.post('/addDevice', function(req, res) {
         connection_callback.release();
     }
          var query="Insert into devicelist(device_id,device_password,session_id,customer_name,coordinates,address,gsm_mobile_number,key_location,server_gen_reqid,device_req_id,meter1,meter2,meter3,meter4) VALUES ('"+data.device_id+"','"+data.loginpassword+"','00000000','"+data.username+"','"+data.coordinates+"','"+data.address+"','"+data.gsmmobilenumber+"','"+data.key_location+"','0000','0000','"+data.meter1+"','"+data.meter2+"','"+data.meter3+"','"+data.meter4+"') ON DUPLICATE KEY UPDATE device_id='"+data.device_id+"',device_password='"+data.loginpassword+"',customer_name='"+data.username+"',address='"+data.address+"',coordinates='"+data.coordinates+"',session_id='00000000',config_password='"+data.configpassword+"',gsm_mobile_number='"+data.gsmmobilenumber+"',key_location='"+data.key_location+"',server_gen_reqid='0000',device_req_id='0000',meter1='"+data.meter1+"',meter2='"+data.meter2+"',meter3='"+data.meter3+"',meter4='"+data.meter4+"'";
-        console.log(query);
+        //console.log(query);
         connection_callback.query(query, function (err, result, fields) {
             if(err)
 		res.send("ERR");
@@ -255,7 +256,7 @@ app.post('/addDevice', function(req, res) {
                 });
             }
         });
-connection_callback.end();    
+connection_callback.release();    
 });
   });
 
@@ -263,7 +264,7 @@ app.post('/deletedevices', function(req, res) {
     var datadbnames=["home_config","network_config","serial_config","server_config","slave_config","analog","date_time_config","digital_count_config","config_change","control_data","device_log_current","device_log_historical","raw_table"];
     var data=req.body.data;
     var user_id=req.body.user_id; 
-    console.log(req.body.data);
+    //console.log(req.body.data);
     connection.getConnection(function(err,connection_callback){
         if(err){
             connection_callback.release();
@@ -276,7 +277,7 @@ app.post('/deletedevices', function(req, res) {
                 });
         });
     });
-connection_callback.end();  
+connection_callback.release();  
 });    
 });
  
@@ -284,14 +285,14 @@ connection_callback.end();
 app.post('/addUsers', function(req, res) {
   var time=getServerDate();
   var data=req.body.data;
-  console.log("data",data);
+  //console.log("data",data);
   //var user_id=Math.floor(Math.random()*89999+10000);
   connection.getConnection(function(err,connection_callback){
     if(err){
         connection_callback.release();
     }
     var user_id;
-console.log("INSERT into user_details(password,user_name,email_id,role,contact_no,address,last_update_time,approved) VALUES ('"+data.password+"','"+data.username+"','"+data.email+"','"+data.role+"','"+data.phone+"','"+data.address+"','"+time+"','0')");
+//console.log("INSERT into user_details(password,user_name,email_id,role,contact_no,address,last_update_time,approved) VALUES ('"+data.password+"','"+data.username+"','"+data.email+"','"+data.role+"','"+data.phone+"','"+data.address+"','"+time+"','0')");
  connection_callback.query("INSERT into user_details(password,user_name,email_id,role,contact_no,address,last_update_time,approved) VALUES ('"+data.password+"','"+data.username+"','"+data.email+"','"+data.role+"','"+data.phone+"','"+data.address+"','"+time+"','0')", function (err, result, fields) {
     if(err) {
         console.log("err-code",err.code);
@@ -310,7 +311,7 @@ console.log("INSERT into user_details(password,user_name,email_id,role,contact_n
   });
 }
 });
-connection_callback.end();
+connection_callback.release();
   });
 });
 
@@ -321,7 +322,7 @@ connection.getConnection(function(err,connection_callback){
     if(err){
         connection_callback.release();
     }
-  console.log("Update user_details set user_name='"+data.username+"',password='"+data.password+"',email_id='"+data.email+"',role='"+data.role+"',contact_no='"+data.phone+"',address='"+data.address+"',last_update_time='"+time+"' where user_id='"+data.user_id+"'");
+  //console.log("Update user_details set user_name='"+data.username+"',password='"+data.password+"',email_id='"+data.email+"',role='"+data.role+"',contact_no='"+data.phone+"',address='"+data.address+"',last_update_time='"+time+"' where user_id='"+data.user_id+"'");
   connection_callback.query("Update user_details set user_name='"+data.username+"',password='"+data.password+"',email_id='"+data.email+"',role='"+data.role+"',contact_no='"+data.phone+"',address='"+data.address+"',last_update_time='"+time+"',approved='0' where user_id='"+data.user_id+"'", function (err, result, fields) {
     if(err) {
         console.log("err-code",err.code);
@@ -332,7 +333,7 @@ connection.getConnection(function(err,connection_callback){
               res.send("I_ERR");
           }
       }
-  console.log("delete from user_device_list where user_id IN (select distinct user_id from user_details where user_name='"+data.username+"' and password='"+data.password+"' and emai_id='"+data.email+"' and role='"+data.role+"' and contact_no='"+data.phone+"' and address='"+data.address+"')");
+  //console.log("delete from user_device_list where user_id IN (select distinct user_id from user_details where user_name='"+data.username+"' and password='"+data.password+"' and emai_id='"+data.email+"' and role='"+data.role+"' and contact_no='"+data.phone+"' and address='"+data.address+"')");
   connection_callback.query("delete from user_device_list where user_id='"+data.user_id+"'", function (err, result, fields) { 
       if(err){
         res.send("I_ERR");
@@ -343,7 +344,7 @@ connection.getConnection(function(err,connection_callback){
     res.send("DONE");
   else
   data.assigned.map(function(temp_device_id,i){
-  console.log("INSERT INTO user_device_list(user_id,device_id) VALUES ('"+data.user_id+"','"+temp_device_id+"')");
+  //console.log("INSERT INTO user_device_list(user_id,device_id) VALUES ('"+data.user_id+"','"+temp_device_id+"')");
     connection_callback.query("INSERT INTO user_device_list(user_id,device_id) VALUES ('"+data.user_id+"','"+temp_device_id+"')", function (err, result, fields) {
         if(err){
            count++;
@@ -358,9 +359,9 @@ connection.getConnection(function(err,connection_callback){
     });
   });
 });
-connection_callback.end();
+connection_callback.release();
 });
-  console.log(data);
+  //console.log(data);
 });
 
 
@@ -377,16 +378,16 @@ app.post('/getUserData', function(req, res) {
     connection_callback.query("Select device_id from user_device_list where user_id='"+response.user_details.user_id+"'", function (err, result2, fields){
       if (err) throw err;
       response.user_device_list=result2;
-      console.log(response);
+      //console.log(response);
       connection_callback.query("select device_id from devicelist where not device_id in (select device_id from user_device_list where user_id ='"+response.user_details.user_id+"')", function (err, result3, fields){
         if (err) throw err;
         response.non_assigned_device_list=result3;
-        console.log(response);
+        //console.log(response);
         res.send(response);
       }); 
     });
   });
-connection_callback.end();
+connection_callback.release();
 });
 });
 
@@ -394,14 +395,14 @@ connection_callback.end();
 app.post('/delete', function(req, res) {
   var data=req.body.data;
   console.log("Running");
-  console.log(data);
+  //console.log(data);
   connection.getConnection(function(err,connection_callback){
     if(err){
         connection_callback.release();
     }
     connection_callback.query("Delete from user_device_list where user_id='"+data.user_id+"'");
     connection_callback.query("Delete from user_details where user_id='"+data.user_id+"'", function (err, result, fields) {});
-connection_callback.end();  
+connection_callback.release();  
 });
 });
 
@@ -415,7 +416,7 @@ app.post('/device/updateSolenoid', function(req, res){
   device_id = device_id.replace( /:/g, "" );
   var solenoid = req.body.solenoid;
   var date=getServerDate();
-  console.log("device_id :"+device_id+"solenoid : "+solenoid);
+  //console.log("device_id :"+device_id+"solenoid : "+solenoid);
   connection_callback.query("Select relay_changes from control_data where device_id='"+device_id+"'", function (err, relay_changes, fields){
   if(relay_changes.length==0){
     connection_callback.query("INSERT INTO control_data (device_id, solenoid, last_updated, device_state_updated,relay_changes) VALUES('"+device_id+"','"+solenoid+"','"+date+"','1','1') ON DUPLICATE KEY UPDATE solenoid = '"+solenoid+"', last_updated='"+date+"',device_state_updated='1',relay_changes='1'", function (err, result, fields){
@@ -432,7 +433,7 @@ app.post('/device/updateSolenoid', function(req, res){
          });     
   }
 });
-connection_callback.end();
+connection_callback.release();
 });
 });
 
@@ -449,7 +450,7 @@ app.post('/users/register', function(req, res){
   var mobile_num = req.body.mobile;
   var address = req.body.address;
   connection_callback.query("Insert into user_details (user_name,email_id, contact_no,address,last_update_time,password)VALUES('"+userNmae+"','"+email_id+"','"+mobile_num+"','"+address+"','"+date+"','"+password+"')", function (err, result, fields){
-  console.log("Insert into user_details (user_name,email_id, contact_no,address,last_update_time,password)VALUES('"+userNmae+"','"+email_id+"','"+mobile_num+"','"+address+"','"+date+"','"+password+"')");
+  //console.log("Insert into user_details (user_name,email_id, contact_no,address,last_update_time,password)VALUES('"+userNmae+"','"+email_id+"','"+mobile_num+"','"+address+"','"+date+"','"+password+"')");
   if (err){
 
     if(err.code == 'ER_DUP_ENTRY'){
@@ -461,7 +462,7 @@ app.post('/users/register', function(req, res){
   else
       res.send("0");
    });
-connection_callback.end();
+connection_callback.release();
 });
 });
 
@@ -476,18 +477,18 @@ app.post('/users/login', function(req, res){
   if (err){throw err;}
   if(result.length>0 && result[0].email_id===username){
       res.send(result);
-      console.log("device_id :"+username+"solenoid : "+password+" Record exists");
+      //console.log("device_id :"+username+"solenoid : "+password+" Record exists");
    } 
    else{res.send("0");}
   }); 
-connection_callback.end();  
+connection_callback.release();  
 });
 });
 
 app.post('/reporting', function(req, res){
     var queryid=req.body.param;
     var deviceId=req.body.deviceId;
-    console.log(queryid);
+    //console.log(queryid);
     var query="";
     if(queryid=="TL")
         query="SELECT log_time,gas_level FROM device_log_historical where device_id='"+deviceId+"' order by log_time limit 5000";
@@ -509,7 +510,7 @@ app.post('/reporting', function(req, res){
         if(err){
             connection_callback.release();
         }
-            console.log(query);
+            //console.log(query);
                 connection_callback.query(query, function (err, result, fields){
                 if (err){throw err;}
                 if(result.length>0){
@@ -517,7 +518,7 @@ app.post('/reporting', function(req, res){
                  } 
                  else{res.send("0");}
                 });
-      connection_callback.end();
+      connection_callback.release();
             });
   });
 
@@ -541,7 +542,7 @@ app.post('/reporting', function(req, res){
                 } 
                  else{res.send("0");}
                 });
-      connection_callback.end();
+      connection_callback.release();
             });
   });
 
@@ -575,14 +576,14 @@ app.post('/reporting', function(req, res){
                         });
                       }  
                     });
-          connection_callback.end();
+          connection_callback.release();
         });
       }
       logindevid=req.body.device_id;
       var currentpage=req.body.currentpage;
       var data=req.body.obj[currentpage];
-      console.log("device_id",logindevid);
-      console.log("data",data);
+      //console.log("device_id",logindevid);
+      //console.log("data",data);
       var datadb={
         "home_config":["mac","fw-version","prodectmodel","bootloader"],
         "network_config":["ip","netmask","gateway","dnsip","networkinterface","dhcp"],
@@ -615,7 +616,7 @@ app.post('/reporting', function(req, res){
                 if(j==datadb[tabledata[1]].length-1){
                 queries[tableid]=queries[tableid].concat("'"+data[value]+"') ON DUPLICATE KEY UPDATE ");
                 dbcolnames[tabledata[1]].map(function(dupdata,i){
-                    console.log("dup");
+                    //console.log("dup");
                     if(typeof(data[datadb[tabledata[1]][i]])=='object')
                     queries[tableid]=queries[tableid].concat(dupdata+"='"+data[datadb[tabledata[1]][i]].join('.')+"',");
                     else
@@ -647,7 +648,7 @@ app.post('/reporting', function(req, res){
             }  
         });
         query_config(currentpage,queries[tableid]);
-        console.log(queries[tableid]);
+        //console.log(queries[tableid]);
          break; 
          case 2:var query=queries[tableid];
          query=query.concat("'"+data["rs232"]["baud_rate"]+"',");
@@ -673,7 +674,7 @@ app.post('/reporting', function(req, res){
          query=query.concat("rs485_stop_bits='0',");
          query=query.concat("rs485_c_timeout='"+data["rs485"]["character_wait_timeout"]+"'");  
          query_config(currentpage,query);
-         console.log(query);
+         //console.log(query);
       break;
       case 3:var query=queries[tableid];
       query=query.concat("'"+data["ip_filtering"]["ip1"].join(".")+","+data["ip_filtering"]["ip2"].join(".")+","+data["ip_filtering"]["ip3"].join(".")+","+data["ip_filtering"]["ip4"].join(".")+","+data["ip_filtering"]["ip5"].join(".")+"',");
@@ -729,7 +730,7 @@ app.post('/reporting', function(req, res){
       query=query.concat("gsm_user_id='"+data["gsm"]["user_id"]+"',");
       query=query.concat("gsm_password='"+data["gsm"]["password"]+"'");
       query_config(currentpage,query);
-      console.log(query);
+      //console.log(query);
       break;
       case 4:var query=queries[tableid];
       query=query.concat("'"+data["http_post_interval"]+"',");
@@ -743,7 +744,7 @@ app.post('/reporting', function(req, res){
       query=query.concat("ups_query='"+data["ups_query"]+"',");
       query=query.concat("http_method='"+data["http_method"]+"'");
       query_config(currentpage,query);
-      console.log(query);
+      //console.log(query);
       break;
       case 5:var query=queries[tableid];
       var params=["offset","threshold","upperLimit","lowerLimit","method","relay"];
@@ -775,7 +776,7 @@ app.post('/reporting', function(req, res){
               query=query.concat(dbcolnames.analog[j]+"='"+data["numbers"]["num"+i]+"'");
         }       
         query_config(currentpage,query);
-      console.log(query);
+      //console.log(query);
       break;
       case 6:var query=queries[tableid];
       query=query.concat("'"+data["enableNTP"]+"',");  
@@ -814,7 +815,7 @@ app.post('/reporting', function(req, res){
       query=query.concat(dbcolnames.date_time_config[j]+"='"+data["rtcDate"].split("/").reverse().join("-")+"',");j++;
       query=query.concat(dbcolnames.date_time_config[j]+"='"+data["rtcTime"]+"'");      
       query_config(currentpage,query);
-      console.log(query);      
+      //console.log(query);      
       break;
       case 7:var query=queries[tableid];
       var params=["pluseCount","digitalChange","pluseCountNum","setpulsecount"];
@@ -845,7 +846,7 @@ app.post('/reporting', function(req, res){
         });
       }
       query_config(currentpage,query);
-      console.log(query);
+      //console.log(query);
       break;
     }
     });
@@ -858,7 +859,7 @@ var connection=mysql.createPool(
         connectionLimit:100,
         user:"root",
         host:"localhost",
-        password:"root",
+        password:"root123#",
         database:"data_logger",
         debug:false
     }

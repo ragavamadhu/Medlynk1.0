@@ -36,6 +36,8 @@ export class AuthenticationService {
         localStorage.removeItem('userName');
         localStorage.removeItem('userRole');
         localStorage.removeItem('clickedDevice');
-        localStorage.removeItem('clickedItem');
+        localStorage.removeItem('markerHidden');
+        localStorage.removeItem('thHistory');
+        localStorage.removeItem('zoomLevel');
     }
 }

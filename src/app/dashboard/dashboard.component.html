@@ -16,9 +16,9 @@
                 </option>
            </select>
         </div>
-        <agm-map  [latitude]="lat" [longitude]="lng"  [zoom]="zoomLevel" [mapTypeControl]="true"  (zoomChange)="zoomChange($event)">
-        <agm-marker-cluster [averageCenter]='true' imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
-                <agm-marker  *ngFor="let m of selectedData; let i = index"
+        <agm-map  *ngIf='blinkingNot?false:true' [latitude]="lat" [longitude]="lng"  [zoom]="zoomLevel" [mapTypeControl]="true"  (zoomChange)="zoomChange($event)">
+        <agm-marker-cluster  [averageCenter]='true' imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
+           <agm-marker  *ngFor="let m of selectedData; let i = index"
                   [latitude]="m.lat"
                   [longitude]="m.lng"
                   (markerClick)="clickedMarker(m, i)"
@@ -30,5 +30,18 @@
                   </agm-info-window>
           </agm-marker>
         </agm-marker-cluster>
+        </agm-map>
+        <agm-map *ngIf='blinkingNot?true:false' [latitude]="lat" [longitude]="lng"  [zoom]="zoomLevel" [mapTypeControl]="true"  (zoomChange)="zoomChange($event)">
+                   <agm-marker  *ngFor="let m of selectedData; let i = index"
+                          [latitude]="m.lat"
+                          [longitude]="m.lng"
+                          (markerClick)="clickedMarker(m, i)"
+                          [iconUrl]="m.iconUrl"
+                          [visible]="markerHidden[m.label]?.val"
+                          (mouseOver)="mouseOver(infoWindow,m)"
+                          (mouseOut)="mouseOut(infoWindow,m)">           
+                          <agm-info-window #infoWindow  [latitude]="m.lat" [longitude]="m.lng" [isOpen]="m.info" >{{m.label}}<br> {{m.message}}
+                          </agm-info-window>
+                  </agm-marker>
         </agm-map>
         </div>

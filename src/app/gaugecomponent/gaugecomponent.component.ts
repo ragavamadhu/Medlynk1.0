@@ -100,6 +100,7 @@ export class GaugecomponentComponent implements OnInit,OnDestroy{
 
           
           for (var i = 0; i < data.length; i++){
+          console.log(data[i]);
           this.meterData=[data[i].meter1Data=='none' || data[i].meter1Data==''?'none':data[i].meter1Data,data[i].meter2Data=='none' || data[i].meter2Data==''?'none':data[i].meter2Data,data[i].meter3Data=='none' || data[i].meter3Data==''?'none':data[i].meter3Data,data[i].meter4Data=='none' || data[i].meter4Data==''?'none':data[i].meter4Data];
           var tankPressureA =data[i].tank_pressure;
           var linePressureA = data[i].line_pressure;
@@ -232,7 +233,7 @@ export class GaugecomponentComponent implements OnInit,OnDestroy{
           else{ 
               this.imgAlarm= appConfig.imagePath+'beacongreen.jpg';}    
 
-          if(Number(data[i].low_gas)==1 || (data[i].ang3_threshold!=null && data[i].ang3_threshold=="ENABLE" && data[i].ang3_lower_limit!=null && Number(data[i].gas_level)*1000<Number(data[i].ang3_lower_limit)  )){ 
+          if(Number(data[i].low_gas)==1 ||(this.tankLevel<=15 || this.tankLevel>=85 )||(data[i].ang3_threshold!=null && data[i].ang3_threshold=="ENABLE" && data[i].ang3_lower_limit!=null && Number(data[i].gas_level)*1000<Number(data[i].ang3_lower_limit)  )){ 
             this.imgBeacon=appConfig.imagePath+'beaconred.png';}
           else{ 
              this.imgBeacon=appConfig.imagePath+'beacongreen.jpg';}  
